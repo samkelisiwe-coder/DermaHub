@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Somatology App</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f6f6f4;
+      --bg-tertiary: #f0efea;
+      --text: #1a1a18;
+      --text-secondary: #6b6b66;
+      --border: rgba(0,0,0,0.12);
+      --border-secondary: rgba(0,0,0,0.2);
+      --info-bg: #e6f1fb;
+      --info-text: #0c447c;
+      --success-bg: #eaf3de;
+      --success-text: #3b6d11;
+      --danger-bg: #fcebeb;
+      --danger-text: #a32d2d;
+      --warning-bg: #faeeda;
+      --warning-text: #854f0b;
+      --radius: 8px;
+      --radius-lg: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1c1c1a;
+        --bg-secondary: #252523;
+        --bg-tertiary: #2c2c2a;
+        --text: #f0efe8;
+        --text-secondary: #9e9e98;
+        --border: rgba(255,255,255,0.1);
+        --border-secondary: rgba(255,255,255,0.18);
+        --info-bg: #042c53;
+        --info-text: #b5d4f4;
+        --success-bg: #173404;
+        --success-text: #c0dd97;
+        --danger-bg: #501313;
+        --danger-text: #f7c1c1;
+        --warning-bg: #412402;
+        --warning-text: #fac775;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-tertiary);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--bg);
+      border-bottom: 0.5px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header h1 {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    header p {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--info-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--info-text);
+      font-size: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+    }
+
+    .nav {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .nav-btn {
+      padding: 8px 16px;
+      border: 0.5px solid var(--border-secondary);
+      border-radius: var(--radius);
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text-secondary);
+      transition: background 0.15s;
+    }
+
+    .nav-btn.active {
+      background: var(--bg);
+      color: var(--text);
+      border-color: var(--border-secondary);
+      font-weight: 500;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .nav-btn:hover { background: var(--bg-secondary); }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .section-title { font-size: 18px; font-weight: 500; margin-bottom: 1rem; }
+
+    .cat-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+
+    .cat-tab {
+      padding: 6px 14px;
+      border: 0.5px solid var(--border);
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text-secondary);
+      background: transparent;
+    }
+
+    .cat-tab.active {
+      background: var(--info-bg);
+      color: var(--info-text);
+      border-color: var(--info-text);
+    }
+
+    .treatment-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      background: var(--bg);
+    }
+
+    .treatment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      cursor: pointer;
+    }
+
+    .treatment-name { font-size: 16px; font-weight: 500; }
+
+    .treatment-badge {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--success-bg);
+      color: var(--success-text);
+    }
+
+    .treatment-body {
+      display: none;
+      margin-top: 1rem;
+      border-top: 0.5px solid var(--border);
+      padding-top: 1rem;
+    }
+
+    .treatment-body.open { display: block; }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-block {
+      padding: 0.75rem;
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+    }
+
+    .info-block.full { grid-column: 1 / -1; }
+
+    .info-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .info-text { font-size: 14px; line-height: 1.6; }
+
+    .contra-block {
+      padding: 0.75rem;
+      background: var(--danger-bg);
+      border-radius: var(--radius);
+      margin-bottom: 0.75rem;
+    }
+
+    .contra-label {
+      font-size: 12px;
+      color: var(--danger-text);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .aftercare-block {
+      padding: 0.75rem;
+      background: var(--success-bg);
+      border-radius: var(--radius);
+    }
+
+    .aftercare-label {
+      font-size: 12px;
+      color: var(--success-text);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .steps-list { list-style: none; counter-reset: steps; }
+
+    .steps-list li {
+      counter-increment: steps;
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .steps-list li::before {
+      content: counter(steps);
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--info-bg);
+      color: var(--info-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 500;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .expand-icon { font-size: 18px; color: var(--text-secondary); transition: transform 0.2s; }
+    .expand-icon.open { transform: rotate(180deg); }
+
+    .ingredient-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .ing-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      background: var(--bg);
+    }
+
+    .ing-name { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+    .ing-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 10px; }
+    .ing-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .tag { font-size: 11px; padding: 3px 10px; border-radius: 20px; }
+    .tag-skin { background: var(--info-bg); color: var(--info-text); }
+    .tag-condition { background: var(--warning-bg); color: var(--warning-text); }
+
+    .ing-warning {
+      padding: 8px 10px;
+      background: var(--danger-bg);
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: var(--danger-text);
+    }
+
+    .search-bar {
+      width: 100%;
+      padding: 10px 14px;
+      border: 0.5px solid var(--border-secondary);
+      border-radius: var(--radius);
+      font-size: 14px;
+      background: var(--bg);
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+
+    /* AI chat */
+    .ai-panel {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    .ai-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 0.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ai-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success-text); }
+
+    .chat-messages {
+      padding: 1rem;
+      min-height: 260px;
+      max-height: 420px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .msg {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: var(--radius-lg);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .msg-user {
+      align-self: flex-end;
+      background: var(--info-bg);
+      color: var(--info-text);
+      border-bottom-right-radius: 4px;
+    }
+
+    .msg-ai {
+      align-self: flex-start;
+      background: var(--bg-secondary);
+      color: var(--text);
+      border-bottom-left-radius: 4px;
+    }
+
+    .msg-thinking { color: var(--text-secondary); font-style: italic; }
+
+    .quick-questions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 0 1rem 1rem;
+    }
+
+    .qq-btn {
+      padding: 6px 12px;
+      border: 0.5px solid var(--border-secondary);
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-secondary);
+    }
+
+    .qq-btn:hover { background: var(--bg-secondary); }
+
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+      padding: 1rem;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 0.5px solid var(--border-secondary);
+      border-radius: var(--radius);
+      font-size: 14px;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .send-btn {
+      padding: 10px 18px;
+      background: var(--info-bg);
+      color: var(--info-text);
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Profile */
+    .profile-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      max-width: 520px;
+      background: var(--bg);
+    }
+
+    .form-group { margin-bottom: 1rem; }
+
+    .form-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 0.5px solid var(--border-secondary);
+      border-radius: var(--radius);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .checkbox-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .submit-btn {
+      padding: 10px 24px;
+      background: var(--info-bg);
+      color: var(--info-text);
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+
+    .profile-display {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      background: var(--bg);
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--info-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--info-text);
+    }
+
+    .reco-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      background: var(--bg-secondary);
+    }
+
+    @media (max-width: 600px) {
+      .info-grid { grid-template-columns: 1fr; }
+      .info-block.full { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><i class="ti ti-sparkles"></i></div>
+  <div>
+    <h1>Somatology App</h1>
+    <p>Treatments · Ingredients · Skin consultations</p>
+  </div>
+</header>
+
+<div class="container">
+  <div class="nav">
+    <button class="nav-btn active" onclick="showPage('treatments', this)"><i class="ti ti-sparkles"></i> Treatments</button>
+    <button class="nav-btn" onclick="showPage('ingredients', this)"><i class="ti ti-leaf"></i> Ingredients</button>
+    <button class="nav-btn" onclick="showPage('ai', this)"><i class="ti ti-robot"></i> Ask AI</button>
+    <button class="nav-btn" onclick="showPage('profile', this)"><i class="ti ti-user"></i> My Profile</button>
+  </div>
+
+  <!-- TREATMENTS -->
+  <div id="treatments" class="page active">
+    <p class="section-title">Treatment library</p>
+    <div class="cat-tabs" id="catTabs"></div>
+    <div id="treatmentList"></div>
+  </div>
+
+  <!-- INGREDIENTS -->
+  <div id="ingredients" class="page">
+    <p class="section-title">Ingredient guide</p>
+    <input class="search-bar" type="text" placeholder="Search by ingredient, skin type or condition..." oninput="filterIngredients(this.value)">
+    <div class="ingredient-grid" id="ingredientGrid"></div>
+  </div>
+
+  <!-- AI CHAT -->
+  <div id="ai" class="page">
+    <p class="section-title">Ask the skin assistant</p>
+    <div class="ai-panel">
+      <div class="ai-header">
+        <div class="ai-dot"></div>
+        <span style="font-size:14px;font-weight:500">Skin & treatment assistant</span>
+        <span style="font-size:12px;color:var(--text-secondary);margin-left:auto">Powered by Claude</span>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg msg-ai">Hello! I am your somatology assistant. Ask me anything about skin types, treatments, ingredients, contraindications or aftercare. How can I help you today?</div>
+      </div>
+      <div class="quick-questions" id="quickQs">
+        <button class="qq-btn" onclick="sendQuick('What treatment is best for acne-prone skin?')">Best for acne?</button>
+        <button class="qq-btn" onclick="sendQuick('Which chemical peel is safest for sensitive skin?')">Peels for sensitive skin?</button>
+        <button class="qq-btn" onclick="sendQuick('What are the contraindications for microdermabrasion?')">Microdermabrasion contraindications?</button>
+        <button class="qq-btn" onclick="sendQuick('What ingredients help with hyperpigmentation?')">Hyperpigmentation ingredients?</button>
+        <button class="qq-btn" onclick="sendQuick('What aftercare is needed after a chemical peel?')">Post-peel aftercare?</button>
+      </div>
+      <div class="chat-input-row">
+        <input class="chat-input" id="chatInput" type="text" placeholder="Ask about treatments, ingredients, skin concerns..." onkeydown="if(event.key==='Enter')sendMessage()">
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()"><i class="ti ti-send"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFILE -->
+  <div id="profile" class="page">
+    <p class="section-title">Your profile</p>
+    <div id="profileContent"></div>
+  </div>
+</div>
+
+<script>
+  const API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your Anthropic API key
+
+  const treatments = [
+    {cat:"Facials",name:"Classic deep cleanse facial",skinTypes:["Oily","Combination","Acne-prone"],purpose:"Deep cleanse pores, remove impurities and balance oil production.",steps:["Double cleanse with oil-based then water-based cleanser","Steam face 5–8 minutes to open pores","Manual extraction of blackheads and comedones","Apply enzyme or AHA exfoliant for 5 minutes","Tone with balancing toner","Apply treatment serum (niacinamide or salicylic acid)","Hydrating mask 15 minutes","Lightweight moisturiser and SPF"],equipment:"Facial steamer, magnifying lamp, comedone extractor, hot towels",benefits:"Clearer pores, reduced breakouts, improved texture, balanced sebum production",contraindications:"Active inflamed acne, rosacea, broken skin, recent chemical peel within 2 weeks, isotretinoin use",aftercare:"Avoid makeup 24 hours. No touching face. Gentle cleanser for 48 hours. SPF 50 daily. Avoid sun 48 hours."},
+    {cat:"Facials",name:"Anti-ageing collagen facial",skinTypes:["Mature","Dry","Normal"],purpose:"Stimulate collagen production, reduce fine lines and deeply hydrate ageing skin.",steps:["Gentle milk cleanser double cleanse","Microcurrent or gua sha lymphatic drainage massage","Apply vitamin C serum","Collagen sheet mask 20 minutes","Apply retinol serum (PM only)","Rich peptide moisturiser","Neck and décolletage treatment","SPF 50 application"],equipment:"Microcurrent device, gua sha tool, LED light therapy lamp (red light)",benefits:"Improved elasticity, reduced fine lines, firmer skin, increased hydration, even tone",contraindications:"Pregnancy, pacemaker (microcurrent), epilepsy (LED), active skin infections, recent Botox within 2 weeks",aftercare:"Avoid retinol 48 hours post-treatment. Stay hydrated. Sleep on clean pillowcase. Avoid alcohol-based products 24 hours."},
+    {cat:"Facials",name:"Brightening vitamin C facial",skinTypes:["Dull","Hyperpigmented","Normal","Combination"],purpose:"Even skin tone, fade dark spots and boost radiance using antioxidant-rich actives.",steps:["Oil cleanser followed by foaming cleanser","Gentle enzyme exfoliation","Apply vitamin C serum (15–20%)","Brightening mask with kojic acid or licorice root","Cold globes or cryo massage to reduce redness","Niacinamide serum application","Lightweight brightening moisturiser","SPF 50"],equipment:"Magnifying lamp, cold globes, high-frequency device (optional)",benefits:"Faded hyperpigmentation, brighter complexion, antioxidant protection, improved collagen synthesis",contraindications:"Vitamin C allergy, extremely sensitive skin, active rosacea, open wounds",aftercare:"Strict SPF — vitamin C increases photosensitivity. No direct sun 48 hours. No AHAs/BHAs 24 hours."},
+    {cat:"Chemical Peels",name:"Superficial chemical peel",skinTypes:["All skin types","Sensitive","Normal","Combination"],purpose:"Gentle exfoliation of the outermost skin layer to refresh, brighten and improve mild texture issues with minimal downtime.",steps:["Thoroughly cleanse and degrease skin with acetone prep","Patch test 24 hours prior","Apply low-concentration AHA or BHA (10–20% glycolic or 10–15% lactic acid) with fan brush","Monitor skin for 3–5 minutes — mild tingling expected","Neutralise with sodium bicarbonate solution","Apply calming serum with centella or aloe","Gentle barrier moisturiser","SPF 50"],equipment:"Fan brush, timer, neutraliser, pH strips, magnifying lamp",benefits:"Brighter complexion, improved texture, mild pore refinement, reduced dullness, no significant peeling or downtime",contraindications:"Active skin infections, open wounds, sunburn, allergy to acids used, isotretinoin within 6 months, recent waxing within 48 hours",aftercare:"Avoid active skincare for 48 hours. Gentle cleanser only. SPF 50 every 2 hours outdoors. Avoid heat and gym for 24 hours. No picking or scrubbing."},
+    {cat:"Chemical Peels",name:"Glycolic acid peel (AHA)",skinTypes:["Dull","Hyperpigmented","Acne-prone","Mature"],purpose:"Exfoliate dead skin cells, stimulate cell turnover and treat uneven skin tone.",steps:["Thorough double cleanse and degrease with acetone prep","Patch test 24 hours prior","Apply glycolic acid (20–70%) evenly with fan brush","Monitor 3–7 minutes depending on percentage","Neutralise with sodium bicarbonate solution","Apply calming serum and barrier repair cream","Broad spectrum SPF 50"],equipment:"Fan brush, timer, neutraliser, pH strips, magnifying lamp",benefits:"Improved texture, reduced hyperpigmentation, stimulated collagen, unclogged pores, reduced fine lines",contraindications:"Rosacea, eczema, psoriasis, open wounds, recent waxing within 48 hours, isotretinoin, pregnancy, nursing, sunburn, active herpes outbreak",aftercare:"No exfoliation 7 days. Strict SPF daily. No swimming or sweating 48 hours. Do not pick peeling skin. Gentle cleanser only. Avoid retinoids 1 week."},
+    {cat:"Chemical Peels",name:"Salicylic acid peel (BHA)",skinTypes:["Oily","Acne-prone","Combination"],purpose:"Penetrate sebaceous glands to clear congestion, reduce acne and control oil.",steps:["Degrease skin thoroughly with acetone","Apply salicylic acid (10–30%) with fan brush","Leave 3–5 minutes — monitor frosting","Neutralise completely","Apply calming gel (aloe or centella)","Barrier repair moisturiser","SPF 50"],equipment:"Fan brush, neutraliser, timer, magnifying lamp",benefits:"Reduced acne and blackheads, controlled sebum, anti-inflammatory, improved skin clarity",contraindications:"Aspirin allergy — do NOT use if allergic to aspirin. Dry or sensitive skin, eczema, rosacea, pregnancy, nursing, isotretinoin.",aftercare:"No active skincare 48 hours. Gentle fragrance-free cleanser only. Avoid touching or picking. SPF strictly every 2 hours outdoors. No gym or sauna 48 hours."},
+    {cat:"Microdermabrasion",name:"Crystal microdermabrasion",skinTypes:["Dull","Oily","Mature","Hyperpigmented"],purpose:"Mechanical exfoliation using fine crystals to resurface skin and stimulate circulation.",steps:["Cleanse and degrease skin","Select appropriate crystal tip and suction level","Work in upward strokes across face avoiding eye area","Extra attention to congested areas","Wipe away crystal residue","Apply calming serum","Hydrating sheet mask 10 minutes","Barrier moisturiser and SPF"],equipment:"Microdermabrasion machine with crystal handpiece, suction unit",benefits:"Improved texture, reduced superficial scars, brighter complexion, better product absorption, stimulated circulation",contraindications:"Active acne, rosacea, eczema, open wounds, thin or fragile skin, blood thinners, recent sunburn",aftercare:"Skin sensitive 24–48 hours. Avoid makeup 24 hours. No exfoliation 1 week. SPF daily. Avoid heat and sweating 24 hours."},
+    {cat:"Electrolysis",name:"Thermolysis electrolysis (hair removal)",skinTypes:["All skin types"],purpose:"Permanent hair removal using high-frequency electrical current to destroy the hair follicle.",steps:["Consult and patch test 24 hours prior","Cleanse treatment area thoroughly","Insert fine sterile probe into follicle","Apply thermolysis current 0.5–2 seconds","Remove hair with forceps","Move to next follicle systematically","Soothe with antiseptic and aloe gel","Apply SPF if treating facial area"],equipment:"Electrolysis machine, sterile probes, magnifying lamp, forceps, antiseptic solution",benefits:"Permanent hair removal, suitable for all skin and hair types, precision treatment",contraindications:"Pacemaker, pregnancy, diabetes (poor healing), keloid scarring history, blood thinners, active skin infections in treatment area",aftercare:"Do not touch treated area. Avoid sun 48 hours. No makeup on face 24 hours. Apply prescribed soothing cream. Expect minor redness 24–48 hours."},
+    {cat:"Massage",name:"Swedish body massage",skinTypes:["All skin types"],purpose:"Relax muscles, improve circulation and promote overall wellbeing through flowing strokes.",steps:["Client consultation and contraindication check","Position client comfortably, drape appropriately","Apply warm massage oil or cream","Begin with effleurage (long gliding strokes)","Progress to petrissage (kneading)","Apply tapotement (percussion) to fleshy areas","Friction movements on problem areas","Close with gentle effleurage and rest"],equipment:"Massage table, bolster pillows, warmed oils, hot towels",benefits:"Muscle relaxation, improved circulation, reduced anxiety and stress, lymphatic drainage, pain relief",contraindications:"Deep vein thrombosis, fever, open wounds, fractures, severe osteoporosis, blood clots, recent surgery, cancer (consult GP), varicose veins (avoid direct pressure)",aftercare:"Drink 2+ litres of water. Rest for remainder of day. Avoid alcohol 12 hours. Expect mild muscle soreness 24 hours. Warm bath is fine."},
+    {cat:"Massage",name:"Hot stone massage",skinTypes:["All skin types"],purpose:"Use heated basalt stones to penetrate deep muscle tissue, release tension and promote deep relaxation.",steps:["Heat basalt stones in water to 50–55°C","Cleanse client skin and check temperature sensitivity","Place stones along spine and energy points to warm body","Use stones as extension of hands for gliding effleurage","Deeper petrissage strokes with stones on large muscle groups","Alternate warm and cool stones for circulatory stimulation","Remove all stones and finish with hands-on effleurage","Wrap client in warm towel to rest"],equipment:"Stone heater, basalt stones of various sizes, massage table, towels, oil",benefits:"Deep muscle relaxation, improved circulation, reduced chronic pain, stress relief, improved sleep quality",contraindications:"Diabetes, cardiovascular conditions, high blood pressure, pregnancy, fever, skin conditions or lesions, neuropathy, recent injury or surgery, blood thinners",aftercare:"Drink plenty of water. Avoid strenuous activity 24 hours. Rest and allow muscles to recover. Avoid alcohol. A warm shower is fine later in the day."},
+    {cat:"Massage",name:"Lymphatic drainage massage",skinTypes:["All skin types"],purpose:"Use gentle rhythmic strokes to stimulate the lymphatic system, reduce oedema and support immune function.",steps:["Consult for contraindications — particularly lymph node removal or active infection","Position client supine, ensure room is warm","Begin at lymph node clusters — neck, axilla, groin","Use very light circular pumping strokes towards lymph nodes","Work from distal to proximal (extremities toward core)","Use stationary circles on lymph node areas","Progress systematically through all body quadrants","Close with gentle effleurage to calm the system"],equipment:"Massage table, light carrier oil or dry hands, bolster pillows",benefits:"Reduced water retention and puffiness, immune support, post-surgical recovery, improved skin clarity, reduced cellulite appearance",contraindications:"Active cancer, acute infection, thrombosis, congestive heart failure, acute inflammation, kidney disease",aftercare:"Drink 2+ litres of water — essential post-lymphatic drainage. Avoid alcohol and caffeine 24 hours. Light walking encouraged. Expect frequent urination as toxins clear."},
+    {cat:"Massage",name:"Aromatherapy massage",skinTypes:["All skin types"],purpose:"Combine therapeutic touch with essential oils to address physical and emotional wellbeing.",steps:["Client consultation — establish mood, concerns and allergies","Select appropriate essential oils blended in carrier oil (2–3% dilution)","Patch test essential oil blend on inner arm 24 hours prior","Begin with inhalation of chosen blend to engage olfactory system","Apply long effleurage strokes to spread oil","Progress to petrissage and deeper work as appropriate","Incorporate acupressure points for targeted benefits","Close with breathing exercise and rest period"],equipment:"Massage table, essential oils, carrier oils (sweet almond, jojoba), diffuser, towels",benefits:"Stress relief, improved mood, muscle relaxation, improved sleep, skin nourishment, hormonal balance support",contraindications:"Essential oil allergies, pregnancy (certain oils contraindicated), epilepsy (avoid rosemary, eucalyptus, camphor), asthma, open wounds or skin conditions",aftercare:"Avoid showering 4–6 hours to allow oils to absorb. Stay hydrated. Avoid alcohol. Rest in a calm environment. Note any skin reactions."},
+    {cat:"Body Treatments",name:"Body wrap (detox seaweed)",skinTypes:["All skin types"],purpose:"Detoxify, hydrate and mineralise skin using concentrated seaweed and mineral compounds.",steps:["Full body exfoliation with salt or sugar scrub","Shower to remove exfoliant","Apply warm seaweed mask to entire body","Wrap client in thermal blanket 20–30 minutes","Unwrap and shower off","Apply rich body moisturiser","Scalp massage during treatment wrap"],equipment:"Thermal blanket, large applicator brushes, heated treatment bed",benefits:"Detoxification, improved skin texture, reduced water retention, mineral replenishment, deep hydration",contraindications:"Iodine allergy, thyroid conditions, claustrophobia, high blood pressure, pregnancy, fever",aftercare:"Drink 1.5–2 litres of water. Avoid alcohol 24 hours. No vigorous exercise. Keep skin moisturised daily."},
+    {cat:"Body Treatments",name:"Cellulite treatment",skinTypes:["All skin types"],purpose:"Reduce the appearance of cellulite through targeted stimulation of circulation, lymphatic drainage and collagen remodelling.",steps:["Client consultation and assessment of cellulite grade","Full body dry brush in upward strokes toward the heart","Apply anti-cellulite massage oil or cream (caffeine, retinol or aminophylline based)","Deep petrissage and friction massage on affected areas","Apply vacuum or mechanical massage device to stimulate subcutaneous tissue","Endermologie or cupping techniques on thighs, buttocks and abdomen","Wrap treated areas in thermal bandages 20 minutes","Remove, apply firming serum and moisturise"],equipment:"Dry brush, vacuum massage device or cupping set, thermal bandages, endermologie machine (optional)",benefits:"Improved skin texture, reduced cellulite appearance, enhanced circulation, lymphatic stimulation, firmer skin",contraindications:"Varicose veins (avoid direct pressure), pregnancy, active skin infections, blood thinners, thrombosis, broken skin over treatment area",aftercare:"Drink 2+ litres of water daily. Regular dry brushing at home. Maintain active lifestyle. Avoid tight clothing immediately after. Use firming cream daily."},
+    {cat:"Body Treatments",name:"Paraffin wax treatment",skinTypes:["Dry","Mature","Sensitive"],purpose:"Deeply hydrate, soothe and warm joints and skin using therapeutic paraffin wax immersion.",steps:["Heat paraffin wax to 51–54°C in wax bath — check temperature before application","Cleanse and exfoliate hands, feet or target area","Dip hands or feet into wax 4–6 times to build layers","Wrap in plastic bag or wax paper, then insulating mitt or towel","Leave 15–20 minutes for heat and moisture to penetrate","Peel wax off — skin will be noticeably soft","Apply rich moisturiser immediately while pores are open","Massage in moisturiser with gentle effleurage"],equipment:"Paraffin wax bath and thermostat, wax, plastic bags or wax paper, insulating mitts, moisturiser",benefits:"Intense hydration, softened dry skin, pain and stiffness relief for arthritis, improved circulation, relaxation",contraindications:"Open cuts or wounds, skin infections, rashes, dermatitis, poor circulation, diabetes (risk of burns due to reduced sensation), varicose veins",aftercare:"Moisturise treated area daily. Avoid extremely hot water on treated skin. For hands — wear cotton gloves overnight with moisturiser for enhanced results. Repeat every 2–4 weeks."}
+  ];
+
+  const ingredients = [
+    {name:"Hyaluronic acid",desc:"Powerful humectant that draws moisture into skin and plumps fine lines. Suitable for all skin types.",skins:["Dry","Dehydrated","Normal","Mature"],conditions:["Dehydration","Fine lines","Sensitivity"],warning:null},
+    {name:"Niacinamide",desc:"Vitamin B3 that regulates sebum, fades hyperpigmentation and strengthens the skin barrier.",skins:["Oily","Combination","Acne-prone"],conditions:["Hyperpigmentation","Enlarged pores","Acne"],warning:null},
+    {name:"Retinol",desc:"Vitamin A derivative that accelerates cell turnover, stimulates collagen and reduces wrinkles. Start low and slow.",skins:["Mature","Normal","Oily"],conditions:["Ageing","Fine lines","Hyperpigmentation"],warning:null},
+    {name:"Vitamin C (ascorbic acid)",desc:"Antioxidant that brightens skin, fades dark spots and boosts collagen synthesis. Always use SPF alongside it.",skins:["Dull","Hyperpigmented","Normal"],conditions:["Hyperpigmentation","Dullness","Ageing"],warning:null},
+    {name:"Salicylic acid (BHA)",desc:"Oil-soluble acid that penetrates pores to dissolve excess sebum, treat blackheads and reduce inflammation.",skins:["Oily","Acne-prone","Combination"],conditions:["Acne","Blackheads","Congestion"],warning:"Do NOT use if allergic to aspirin — salicylic acid is chemically related and may cause a reaction."},
+    {name:"Glycolic acid",desc:"AHA derived from sugar cane that exfoliates dead cells, brightens and stimulates collagen. Increases photosensitivity.",skins:["Normal","Oily","Mature"],conditions:["Dullness","Fine lines","Hyperpigmentation"],warning:null},
+    {name:"Lactic acid",desc:"Gentle AHA derived from milk that exfoliates and hydrates simultaneously. Ideal for beginners and sensitive skin.",skins:["Sensitive","Dry","Normal","Mature"],conditions:["Dullness","Dry skin","Mild hyperpigmentation"],warning:null},
+    {name:"Tea tree oil",desc:"Antibacterial and antifungal essential oil that targets acne-causing bacteria. Always dilute — never apply neat.",skins:["Oily","Acne-prone"],conditions:["Acne","Fungal acne","Congestion"],warning:"Must be diluted to 2–5% in a carrier oil. Not suitable for sensitive skin at high concentrations."},
+    {name:"Benzoyl peroxide",desc:"Antibacterial agent that kills acne-causing bacteria and helps clear blocked pores. Can cause dryness.",skins:["Oily","Acne-prone"],conditions:["Acne","Inflammatory breakouts"],warning:"Can bleach clothing and towels. Avoid mixing with retinol or AHA/BHA in the same application. Start at 2.5%."},
+    {name:"Azelaic acid",desc:"Multi-tasking acid that treats acne, reduces redness and fades post-inflammatory hyperpigmentation. Safe in pregnancy.",skins:["Acne-prone","Rosacea-prone","Sensitive"],conditions:["Acne","Rosacea","PIH"],warning:null},
+    {name:"Squalane",desc:"Lightweight plant-derived oil that mimics skin's natural sebum. Non-comedogenic and deeply hydrating.",skins:["All skin types","Dry","Oily","Sensitive"],conditions:["Dehydration","Dry skin","Barrier damage"],warning:null},
+    {name:"Alpha arbutin",desc:"Brightening agent that inhibits tyrosinase to reduce melanin production. Gentler and more stable than kojic acid.",skins:["Hyperpigmented","Normal","Sensitive"],conditions:["Hyperpigmentation","Melasma","Uneven tone"],warning:null},
+    {name:"Bakuchiol",desc:"Plant-based retinol alternative from the babchi plant. Provides anti-ageing benefits without retinol irritation. Safe in pregnancy.",skins:["Sensitive","Mature","Dry","Pregnant"],conditions:["Ageing","Fine lines","Sensitivity"],warning:null},
+    {name:"Aloe vera",desc:"Soothing botanical with anti-inflammatory, hydrating and wound-healing properties. Excellent for post-treatment calming.",skins:["Sensitive","All skin types","Sunburned"],conditions:["Redness","Sensitivity","Sunburn","Post-treatment"],warning:null},
+    {name:"Centella asiatica",desc:"Healing herb that calms inflammation, supports wound healing and strengthens skin barrier. Also known as cica.",skins:["Sensitive","Rosacea-prone","All types"],conditions:["Redness","Sensitivity","Rosacea"],warning:null},
+    {name:"Kojic acid",desc:"Natural skin brightener derived from fungi that inhibits melanin production to fade dark spots.",skins:["Hyperpigmented","Normal","Mature"],conditions:["Hyperpigmentation","Melasma","Uneven tone"],warning:null},
+    {name:"Ceramides",desc:"Lipids naturally found in skin that restore the moisture barrier and prevent transepidermal water loss.",skins:["Dry","Sensitive","Eczema-prone"],conditions:["Eczema","Sensitivity","Dehydration"],warning:null},
+    {name:"Peptides",desc:"Short protein chains that signal skin to produce more collagen and elastin. Key in anti-ageing formulations.",skins:["Mature","Normal","Dry"],conditions:["Ageing","Loss of elasticity","Fine lines"],warning:null},
+    {name:"Zinc oxide",desc:"Physical sunscreen that reflects UV radiation and soothes inflamed skin. Best option for sensitive and rosacea-prone skin.",skins:["Sensitive","Rosacea-prone","All types"],conditions:["UV protection","Rosacea","Sensitivity"],warning:null}
+  ];
+
+  let currentCat = "Facials";
+  let userProfile = null;
+  let chatHistory = [];
+  const cats = ["Facials","Chemical Peels","Microdermabrasion","Electrolysis","Massage","Body Treatments"];
+
+  function showPage(id, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (btn) btn.classList.add('active');
+  }
+
+  function buildCatTabs() {
+    document.getElementById('catTabs').innerHTML = cats.map(c =>
+      `<button class="cat-tab${c === currentCat ? ' active' : ''}" onclick="selectCat('${c}')">${c}</button>`
+    ).join('');
+  }
+
+  function selectCat(cat) {
+    currentCat = cat;
+    buildCatTabs();
+    buildTreatments();
+  }
+
+  function buildTreatments() {
+    const filtered = treatments.filter(t => t.cat === currentCat);
+    document.getElementById('treatmentList').innerHTML = filtered.map((t, i) => `
+      <div class="treatment-card">
+        <div class="treatment-header" onclick="toggleT(${i})">
+          <div>
+            <p class="treatment-name">${t.name}</p>
+            <p style="font-size:12px;color:var(--text-secondary);margin-top:4px">${t.skinTypes.join(' · ')}</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="treatment-badge">${t.cat}</span>
+            <i class="ti ti-chevron-down expand-icon" id="ic${i}"></i>
+          </div>
+        </div>
+        <div class="treatment-body" id="bd${i}">
+          <div class="info-grid">
+            <div class="info-block full"><div class="info-label">Purpose</div><div class="info-text">${t.purpose}</div></div>
+            <div class="info-block full"><div class="info-label">Treatment steps</div><ol class="steps-list">${t.steps.map(s => `<li>${s}</li>`).join('')}</ol></div>
+            <div class="info-block"><div class="info-label">Equipment used</div><div class="info-text">${t.equipment}</div></div>
+            <div class="info-block"><div class="info-label">Benefits</div><div class="info-text">${t.benefits}</div></div>
+          </div>
+          <div class="contra-block"><div class="contra-label"><i class="ti ti-alert-triangle"></i> Contraindications</div><div class="info-text" style="color:var(--danger-text)">${t.contraindications}</div></div>
+          <div style="height:10px"></div>
+          <div class="aftercare-block"><div class="aftercare-label"><i class="ti ti-heart"></i> Aftercare tips</div><div class="info-text" style="color:var(--success-text)">${t.aftercare}</div></div>
+        </div>
+      </div>`).join('');
+  }
+
+  function toggleT(i) {
+    document.getElementById('bd' + i).classList.toggle('open');
+    document.getElementById('ic' + i).classList.toggle('open');
+  }
+
+  function buildIngredients(list) {
+    document.getElementById('ingredientGrid').innerHTML = list.map(ing => `
+      <div class="ing-card">
+        <p class="ing-name">${ing.name}</p>
+        <p class="ing-desc">${ing.desc}</p>
+        ${ing.warning ? `<div class="ing-warning"><i class="ti ti-alert-triangle"></i> ${ing.warning}</div>` : ''}
+        <div class="ing-tags">
+          ${ing.skins.map(s => `<span class="tag tag-skin">${s}</span>`).join('')}
+          ${ing.conditions.map(c => `<span class="tag tag-condition">${c}</span>`).join('')}
+        </div>
+      </div>`).join('');
+  }
+
+  function filterIngredients(val) {
+    const q = val.toLowerCase();
+    buildIngredients(q ? ingredients.filter(i =>
+      i.name.toLowerCase().includes(q) ||
+      i.desc.toLowerCase().includes(q) ||
+      i.skins.some(s => s.toLowerCase().includes(q)) ||
+      i.conditions.some(c => c.toLowerCase().includes(q))
+    ) : ingredients);
+  }
+
+  async function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = '';
+    addMessage(msg, 'user');
+    document.getElementById('quickQs').style.display = 'none';
+    chatHistory.push({ role: 'user', content: msg });
+    const btn = document.getElementById('sendBtn');
+    btn.disabled = true;
+    const thinkEl = addMessage('Thinking...', 'ai thinking');
+
+    const systemPrompt = `You are a knowledgeable and professional somatology assistant for a South African aesthetics app. You help clients and somatology students understand skin types, facial and body treatments, ingredients, contraindications and aftercare advice. Keep answers clear, professional and concise. Always recommend consulting a qualified somatologist for personalised treatment plans. Important: salicylic acid must NOT be used if the client is allergic to aspirin.${userProfile ? ` Client profile — Name: ${userProfile.name}, Skin type: ${userProfile.skinType}, Concerns: ${userProfile.concerns.join(', ')}. Tailor your response to their profile where relevant.` : ''}`;
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': API_KEY,
+          'anthropic-version': '2023-06-01'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: systemPrompt,
+          messages: chatHistory
+        })
+      });
+      const data = await res.json();
+      const reply = data.content && data.content[0] ? data.content[0].text : 'I could not get a response. Please try again.';
+      thinkEl.textContent = reply;
+      thinkEl.classList.remove('msg-thinking');
+      chatHistory.push({ role: 'assistant', content: reply });
+    } catch (e) {
+      thinkEl.textContent = 'Could not connect. Please check your API key and try again.';
+      thinkEl.classList.remove('msg-thinking');
+    }
+    btn.disabled = false;
+    document.getElementById('chatMessages').scrollTop = 9999;
+  }
+
+  function addMessage(text, type) {
+    const box = document.getElementById('chatMessages');
+    const el = document.createElement('div');
+    el.className = 'msg ' + (type === 'user' ? 'msg-user' : 'msg-ai') + (type.includes('thinking') ? ' msg-thinking' : '');
+    el.textContent = text;
+    box.appendChild(el);
+    box.scrollTop = 9999;
+    return el;
+  }
+
+  function sendQuick(q) {
+    document.getElementById('chatInput').value = q;
+    sendMessage();
+  }
+
+  function buildProfile() {
+    const el = document.getElementById('profileContent');
+    if (userProfile) {
+      const initials = userProfile.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+      const recs = treatments.filter(t => t.skinTypes.some(st => userProfile.skinType === st || userProfile.concerns.includes(st))).slice(0, 3);
+      el.innerHTML = `
+        <div class="profile-display">
+          <div class="profile-header">
+            <div class="avatar">${initials}</div>
+            <div><p style="font-weight:500;font-size:16px">${userProfile.name}</p><p style="font-size:13px;color:var(--text-secondary)">${userProfile.email}</p></div>
+          </div>
+          <div style="margin-bottom:1rem"><p style="font-size:13px;color:var(--text-secondary);margin-bottom:4px">Skin type</p><p style="font-size:14px">${userProfile.skinType}</p></div>
+          <div style="margin-bottom:1rem"><p style="font-size:13px;color:var(--text-secondary);margin-bottom:4px">Main concerns</p><div style="display:flex;flex-wrap:wrap;gap:6px">${userProfile.concerns.map(c => `<span class="tag tag-skin">${c}</span>`).join('')}</div></div>
+          <p style="font-size:15px;font-weight:500;margin-bottom:0.75rem">Recommended treatments for you</p>
+          ${recs.map(r => `<div class="reco-card"><p style="font-weight:500;font-size:14px;margin-bottom:4px">${r.name}</p><p style="font-size:13px;color:var(--text-secondary)">${r.cat} · ${r.purpose.slice(0, 80)}...</p></div>`).join('')}
+          <button class="cat-tab" style="margin-top:1rem" onclick="userProfile=null;buildProfile()">Edit profile</button>
+        </div>`;
+    } else {
+      el.innerHTML = `
+        <div class="profile-card">
+          <p style="font-size:15px;font-weight:500;margin-bottom:1rem">Create your skin profile</p>
+          <div class="form-group"><label class="form-label">Full name</label><input class="form-input" id="pName" type="text" placeholder="Your name"></div>
+          <div class="form-group"><label class="form-label">Email address</label><input class="form-input" id="pEmail" type="email" placeholder="your@email.com"></div>
+          <div class="form-group"><label class="form-label">Skin type</label>
+            <select class="form-input" id="pSkin">
+              <option value="">Select skin type...</option>
+              <option>Oily</option><option>Dry</option><option>Combination</option><option>Normal</option>
+              <option>Sensitive</option><option>Mature</option><option>Acne-prone</option><option>Hyperpigmented</option><option>Dull</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Main skin concerns</label>
+            <div class="checkbox-group">
+              ${["Acne","Ageing","Hyperpigmentation","Dehydration","Rosacea","Blackheads","Fine lines","Sensitivity","Dullness","Uneven tone","Cellulite","Dry skin"].map(c =>
+                `<label class="checkbox-item"><input type="checkbox" value="${c}" class="concern-cb"> ${c}</label>`
+              ).join('')}
+            </div>
+          </div>
+          <button class="submit-btn" onclick="saveProfile()">Save my profile</button>
+        </div>`;
+    }
+  }
+
+  function saveProfile() {
+    const name = document.getElementById('pName').value.trim();
+    const email = document.getElementById('pEmail').value.trim();
+    const skinType = document.getElementById('pSkin').value;
+    const concerns = [...document.querySelectorAll('.concern-cb:checked')].map(cb => cb.value);
+    if (!name || !email || !skinType) { alert('Please fill in your name, email and skin type.'); return; }
+    userProfile = { name, email, skinType, concerns };
+    buildProfile();
+  }
+
+  buildCatTabs();
+  buildTreatments();
+  buildIngredients(ingredients);
+  buildProfile();
+</script>
+</body>
+</html>
