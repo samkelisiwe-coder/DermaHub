@@ -97,6 +97,8 @@
       --blue-mid: #2563a8;
       --blue-light: #a8c8f0;
       --blue-lighter: #e8f0fb;
+      --navy-deep: #0f2044;
+      --navy-mid: #1a3a6e;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -118,6 +120,8 @@
         --warning-text: #fac775;
         --blue-lighter: #0a1e3a;
         --blue-light: #2563a8;
+        --blue-darkest: #d6e8fb;
+        --blue-dark: #8fbce6;
       }
     }
     /* ── DARK MODE ── */
@@ -139,6 +143,8 @@
       --warning-text: #fac775;
       --blue-lighter: #0a1e3a;
       --blue-light: #2563a8;
+      --blue-darkest: #d6e8fb;
+      --blue-dark: #8fbce6;
     }
 
 
@@ -173,7 +179,7 @@
     }
 
     .modal-top {
-      background: var(--blue-darkest);
+      background: var(--navy-deep);
       padding: 1.5rem;
       text-align: center;
     }
@@ -182,7 +188,7 @@
       width: 52px;
       height: 52px;
       border-radius: 14px;
-      background: var(--blue-dark);
+      background: var(--navy-mid);
       border: 0.5px solid var(--blue-mid);
       display: flex;
       align-items: center;
@@ -251,7 +257,7 @@
     }
 
     .enter-btn.enabled { opacity: 1; pointer-events: auto; }
-    .enter-btn.enabled:hover { background: var(--blue-dark); }
+    .enter-btn.enabled:hover { background: var(--navy-mid); }
 
     .modal-note {
       font-size: 11px;
@@ -282,7 +288,7 @@
       width: 40px;
       height: 40px;
       border-radius: 10px;
-      background: var(--blue-darkest);
+      background: var(--navy-deep);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -390,7 +396,7 @@
     .hero-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
 
     .btn-primary { padding: 10px 24px; background: var(--blue-mid); color: #e8f0fb; border: none; border-radius: var(--radius); cursor: pointer; font-size: 14px; font-weight: 500; }
-    .btn-primary:hover { background: var(--blue-dark); }
+    .btn-primary:hover { background: var(--navy-mid); }
     .btn-outline { padding: 10px 24px; background: transparent; color: var(--blue-mid); border: 0.5px solid var(--blue-mid); border-radius: var(--radius); cursor: pointer; font-size: 14px; }
     .btn-outline:hover { background: var(--blue-lighter); }
 
@@ -484,6 +490,16 @@
 
     /* ── INGREDIENTS ── */
     .ing-search { width: 100%; padding: 10px 14px; border: 0.5px solid var(--border-secondary); border-radius: var(--radius); font-size: 14px; background: var(--bg); color: var(--text); margin-bottom: 1.25rem; }
+
+    .subtab-row { display: flex; gap: 6px; margin-bottom: 1.25rem; background: var(--bg-secondary); border-radius: 10px; padding: 4px; }
+    .subtab-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 10px; border: none; background: transparent; border-radius: 8px; font-size: 12.5px; font-weight: 500; color: var(--text-secondary); cursor: pointer; transition: all 0.18s; }
+    .subtab-btn.active { background: var(--bg); color: var(--blue-mid); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .subtab-btn:hover:not(.active) { color: var(--text); }
+
+    .contra-toggle-card { border: 0.5px solid var(--border); border-radius: 12px; background: var(--bg); overflow: hidden; }
+    .contra-toggle-head { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0.9rem 1.1rem; background: transparent; border: none; cursor: pointer; text-align: left; }
+    .contra-toggle-head .expand-icon { transition: transform 0.2s; color: var(--text-secondary); flex-shrink: 0; }
+    .contra-toggle-head .expand-icon.open { transform: rotate(180deg); }
     .ing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1rem; }
     .ing-card { border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; background: var(--bg); }
     .ing-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--blue-lighter); display: flex; align-items: center; justify-content: center; color: var(--blue-mid); font-size: 16px; margin-bottom: 10px; }
@@ -498,7 +514,7 @@
     /* ── AI CHAT ── */
     .ai-panel { border: 0.5px solid var(--blue-mid); border-radius: var(--radius-lg); background: var(--bg); overflow: hidden; }
     .ai-head { padding: 1rem 1.25rem; background: var(--blue-lighter); border-bottom: 0.5px solid var(--blue-light); display: flex; align-items: center; gap: 10px; }
-    .ai-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--blue-darkest); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ai-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--navy-deep); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .ai-title { font-size: 14px; font-weight: 500; color: var(--blue-darkest); }
     .ai-sub { font-size: 12px; color: var(--blue-mid); }
     .chat-msgs { padding: 1rem; min-height: 260px; max-height: 420px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
@@ -530,7 +546,7 @@
 
     /* ── FEATURE BANNER ── */
     .feature-banner { margin: 0 1.5rem 1.5rem; padding: 1.25rem; background: var(--blue-lighter); border-radius: var(--radius-lg); border: 0.5px solid var(--blue-light); display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-    .banner-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--blue-darkest); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .banner-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--navy-deep); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
     /* ── FOOTER ── */
     footer { text-align: center; padding: 2rem 1rem; border-top: 0.5px solid var(--border); margin-top: 2rem; }
@@ -660,6 +676,17 @@
       .dash-grid { grid-template-columns: 1fr; }
     }
 
+    .protocol-inline-block { padding: 0.75rem; background: var(--blue-lighter); border-radius: var(--radius); }
+    .protocol-inline-block .protocol-cols { grid-template-columns: 1fr 1fr; background: transparent; border-radius: 8px; overflow: hidden; margin-top: 8px; }
+    .protocol-inline-block .protocol-col { padding: 0.85rem; }
+    .protocol-inline-block .pre-col { background: var(--bg); border-right: 0.5px solid var(--border); }
+    .protocol-inline-block .post-col { background: var(--bg-secondary); }
+    .protocol-inline-block .protocol-list li { font-size: 12.5px; }
+    @media (max-width: 600px) {
+      .protocol-inline-block .protocol-cols { grid-template-columns: 1fr; }
+      .protocol-inline-block .pre-col { border-right: none; border-bottom: 0.5px solid var(--border); }
+    }
+
 
     /* ── FACE ZONE MAP ── */
     .face-map-section { padding: 1.5rem; background: var(--bg); border-radius: 12px; margin: 0 1.5rem 1.5rem; border: 0.5px solid var(--border); }
@@ -761,7 +788,7 @@
 
 <!-- ══ APP HEADER ══ -->
 <header>
-  <div class="brand" onclick="showPage('home', document.querySelectorAll('.nav-btn')[0])">
+  <div class="brand" onclick="showPage('home', document.querySelector('.nav-btn[data-page=\'home\']'))">
     <div class="brand-logo">
       <svg width="26" height="26" viewBox="0 0 40 40" aria-label="DermaHub logo" role="img">
         <text x="20" y="17" text-anchor="middle" font-family="serif" font-size="13" font-weight="700" fill="#a8c8f0" letter-spacing="-0.5">DH</text>
@@ -777,16 +804,12 @@
     </div>
   </div>
   <nav>
-    <button class="nav-btn active" onclick="showPage('home', this)"><i class="ti ti-home" aria-hidden="true"></i><span>Home</span></button>
-    <button class="nav-btn" onclick="showPage('treatments', this)"><i class="ti ti-sparkles" aria-hidden="true"></i><span>Treatments</span></button>
-    <button class="nav-btn" onclick="showPage('ingredients', this)"><i class="ti ti-leaf" aria-hidden="true"></i><span>Ingredients</span></button>
-    <button class="nav-btn" onclick="showPage('checker', this)"><i class="ti ti-flask" aria-hidden="true"></i><span>Checker</span></button>
-    <button class="nav-btn" onclick="showPage('contraindications', this)"><i class="ti ti-shield" aria-hidden="true"></i><span>Contra</span></button>
-    <button class="nav-btn" onclick="showPage('protocols', this)"><i class="ti ti-book" aria-hidden="true"></i><span>Protocols</span></button>
-    <button class="nav-btn" onclick="showPage('ai', this)"><i class="ti ti-robot" aria-hidden="true"></i><span>Ask AI</span></button>
-    <button class="nav-btn" onclick="showPage('profile', this)"><i class="ti ti-user" aria-hidden="true"></i><span>My Profile</span></button>
-    <button class="nav-btn" onclick="showPage('about', this)"><i class="ti ti-info" aria-hidden="true"></i><span>About</span></button>
-    <button class="nav-btn" id="darkToggle" onclick="toggleDark()" aria-label="Toggle dark mode"><i class="ti ti-moon" id="darkIcon" aria-hidden="true"></i><span id="darkLabel">Dark</span></button>
+    <button class="nav-btn active" data-page="home" onclick="showPage('home', this)"><i class="ti ti-home" aria-hidden="true"></i><span>Home</span></button>
+    <button class="nav-btn" data-page="treatments" onclick="showPage('treatments', this)"><i class="ti ti-sparkles" aria-hidden="true"></i><span>Treatments</span></button>
+    <button class="nav-btn" data-page="ingredients" onclick="showPage('ingredients', this)"><i class="ti ti-leaf" aria-hidden="true"></i><span>Ingredients</span></button>
+    <button class="nav-btn" data-page="ai" onclick="showPage('ai', this)"><i class="ti ti-robot" aria-hidden="true"></i><span>Ask AI</span></button>
+    <button class="nav-btn" data-page="profile" onclick="showPage('profile', this)"><i class="ti ti-user" aria-hidden="true"></i><span>My Profile</span></button>
+    <button class="nav-btn" data-page="about" onclick="showPage('about', this)"><i class="ti ti-info" aria-hidden="true"></i><span>About</span></button>
   </nav>
 </header>
 
@@ -808,8 +831,8 @@
         <p class="hero-slogan">Science beyond the skin</p>
         <p class="hero-sub">Explore professional skin treatments, ingredient guides and personalised AI-powered recommendations — all in one place.</p>
         <div class="hero-btns">
-          <button class="btn-primary" onclick="showPage('treatments', document.querySelectorAll('.nav-btn')[1])"><i class="ti ti-sparkles" aria-hidden="true"></i> Browse treatments</button>
-          <button class="btn-outline" onclick="showPage('profile', document.querySelectorAll('.nav-btn')[4])"><i class="ti ti-user" aria-hidden="true"></i> Create my profile</button>
+          <button class="btn-primary" onclick="showPage('treatments', navBtn('treatments'))"><i class="ti ti-sparkles" aria-hidden="true"></i> Browse treatments</button>
+          <button class="btn-outline" onclick="showPage('profile', navBtn('profile'))"><i class="ti ti-user" aria-hidden="true"></i> Create my profile</button>
         </div>
       </div>
     </div>
@@ -1143,7 +1166,7 @@
         <p style="font-size:14px;font-weight:500;color:#0f2044;margin-bottom:3px">Ask the DermaHub skin assistant</p>
         <p style="font-size:13px;color:#2563a8">Get instant answers about treatments, ingredients and your skin concerns.</p>
       </div>
-      <button class="btn-primary" onclick="showPage('ai', document.querySelectorAll('.nav-btn')[3])">Ask now</button>
+      <button class="btn-primary" onclick="showPage('ai', navBtn('ai'))">Ask now</button>
     </div>
   </div>
 
@@ -1160,6 +1183,30 @@
       <div class="filter-pills" id="concernPills"></div>
       <p class="result-count" id="resultCount"></p>
     </div>
+
+    <div style="padding:0 1.5rem 1rem">
+      <div class="contra-toggle-card">
+        <button class="contra-toggle-head" id="contraToggleBtn" onclick="toggleContraPanel()">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:34px;height:34px;border-radius:50%;background:var(--blue-lighter);display:flex;align-items:center;justify-content:center;color:var(--blue-mid);font-size:16px;flex-shrink:0"><i class="ti ti-shield" aria-hidden="true"></i></div>
+            <div style="text-align:left">
+              <p style="font-size:13px;font-weight:500">Contraindication checker</p>
+              <p style="font-size:11.5px;color:var(--text-secondary)">Find which treatments to avoid based on your health conditions</p>
+            </div>
+          </div>
+          <i class="ti ti-chevron-down expand-icon" id="contraToggleIcon" aria-hidden="true"></i>
+        </button>
+        <div id="contraPanelBody" style="display:none">
+          <div class="checker-card" style="margin:0 1.1rem 1rem;width:auto">
+            <p style="font-size:14px;font-weight:500;margin-bottom:1rem;color:var(--blue-darkest)">Select all conditions that apply</p>
+            <div class="cb-group" id="conditionPills" style="gap:8px"></div>
+            <button class="btn-primary" style="margin-top:1.25rem;width:100%;padding:12px" onclick="runContraCheck()"><i class="ti ti-shield-check" aria-hidden="true"></i> Check contraindications</button>
+          </div>
+          <div id="contraResults" style="display:none;margin:0 1.1rem 1.1rem"></div>
+        </div>
+      </div>
+    </div>
+
     <div class="cat-grid" id="treatCatGrid"></div>
     <div class="treatments-section" id="treatmentList"></div>
   </div>
@@ -1168,49 +1215,53 @@
   <div id="ingredients" class="page">
     <div class="section-header"><p class="section-title">Ingredient guide</p></div>
     <div style="padding:0 1.5rem">
-      <input class="ing-search" type="text" placeholder="Search ingredients, skin types or conditions..." oninput="filterIng(this.value)">
-      <div class="ing-grid" id="ingGrid"></div>
-    </div>
-  </div>
-
-  <!-- INGREDIENT CHECKER -->
-  <div id="checker" class="page">
-    <div class="section-header"><p class="section-title">Ingredient compatibility checker</p><span class="section-sub">Check if two ingredients are safe to use together</span></div>
-    <div style="padding:0 1.5rem 1.5rem">
-      <div class="checker-card">
-        <div class="checker-inputs">
-          <div class="checker-input-group">
-            <label class="form-label"><i class="ti ti-flask" aria-hidden="true"></i> First ingredient</label>
-            <div style="position:relative">
-              <input class="form-input" id="ing1Input" type="text" placeholder="e.g. Retinol" oninput="showSuggestions('ing1Input','sug1',this.value)" autocomplete="off">
-              <div class="sug-dropdown" id="sug1"></div>
-            </div>
-          </div>
-          <div class="checker-plus"><i class="ti ti-plus" aria-hidden="true"></i></div>
-          <div class="checker-input-group">
-            <label class="form-label"><i class="ti ti-flask" aria-hidden="true"></i> Second ingredient</label>
-            <div style="position:relative">
-              <input class="form-input" id="ing2Input" type="text" placeholder="e.g. Vitamin C" oninput="showSuggestions('ing2Input','sug2',this.value)" autocomplete="off">
-              <div class="sug-dropdown" id="sug2"></div>
-            </div>
-          </div>
-        </div>
-        <button class="btn-primary" style="width:100%;margin-top:1rem;padding:12px" onclick="checkCompatibility()"><i class="ti ti-shield-check" aria-hidden="true"></i> Check compatibility</button>
+      <div class="subtab-row" id="ingSubtabs">
+        <button class="subtab-btn active" id="ingSubtabGuide" onclick="switchIngTab('guide')"><i class="ti ti-leaf" aria-hidden="true"></i> Guide</button>
+        <button class="subtab-btn" id="ingSubtabChecker" onclick="switchIngTab('checker')"><i class="ti ti-shield-check" aria-hidden="true"></i> Compatibility checker</button>
       </div>
 
-      <div id="checkerResult" style="display:none;margin-top:1rem"></div>
+      <div id="ingGuideSection">
+        <input class="ing-search" type="text" placeholder="Search ingredients, skin types or conditions..." oninput="filterIng(this.value)">
+        <div class="ing-grid" id="ingGrid"></div>
+      </div>
 
-      <div style="margin-top:1.5rem">
-        <p style="font-size:13px;font-weight:500;margin-bottom:10px;color:var(--text-secondary)">Common combinations to check</p>
-        <div style="display:flex;flex-wrap:wrap;gap:8px">
-          <button class="filter-pill" data-a="Retinol" data-b="Vitamin C" onclick="handleQuickCheck(this)">Retinol + Vitamin C</button>
-          <button class="filter-pill" data-a="Niacinamide" data-b="Vitamin C" onclick="handleQuickCheck(this)">Niacinamide + Vitamin C</button>
-          <button class="filter-pill" data-a="Retinol" data-b="Salicylic acid (BHA)" onclick="handleQuickCheck(this)">Retinol + Salicylic acid</button>
-          <button class="filter-pill" data-a="Glycolic acid" data-b="Vitamin C" onclick="handleQuickCheck(this)">Glycolic acid + Vitamin C</button>
-          <button class="filter-pill" data-a="Hyaluronic acid" data-b="Retinol" onclick="handleQuickCheck(this)">Hyaluronic acid + Retinol</button>
-          <button class="filter-pill" data-a="Benzoyl peroxide" data-b="Retinol" onclick="handleQuickCheck(this)">Benzoyl peroxide + Retinol</button>
-          <button class="filter-pill" data-a="Azelaic acid" data-b="Niacinamide" onclick="handleQuickCheck(this)">Azelaic acid + Niacinamide</button>
-          <button class="filter-pill" data-a="Tea tree oil" data-b="Salicylic acid (BHA)" onclick="handleQuickCheck(this)">Tea tree oil + Salicylic acid</button>
+      <div id="ingCheckerSection" style="display:none;padding-bottom:1.5rem">
+        <p class="section-sub" style="display:block;margin-bottom:1rem">Check if two ingredients are safe to use together</p>
+        <div class="checker-card">
+          <div class="checker-inputs">
+            <div class="checker-input-group">
+              <label class="form-label"><i class="ti ti-flask" aria-hidden="true"></i> First ingredient</label>
+              <div style="position:relative">
+                <input class="form-input" id="ing1Input" type="text" placeholder="e.g. Retinol" oninput="showSuggestions('ing1Input','sug1',this.value)" autocomplete="off">
+                <div class="sug-dropdown" id="sug1"></div>
+              </div>
+            </div>
+            <div class="checker-plus"><i class="ti ti-plus" aria-hidden="true"></i></div>
+            <div class="checker-input-group">
+              <label class="form-label"><i class="ti ti-flask" aria-hidden="true"></i> Second ingredient</label>
+              <div style="position:relative">
+                <input class="form-input" id="ing2Input" type="text" placeholder="e.g. Vitamin C" oninput="showSuggestions('ing2Input','sug2',this.value)" autocomplete="off">
+                <div class="sug-dropdown" id="sug2"></div>
+              </div>
+            </div>
+          </div>
+          <button class="btn-primary" style="width:100%;margin-top:1rem;padding:12px" onclick="checkCompatibility()"><i class="ti ti-shield-check" aria-hidden="true"></i> Check compatibility</button>
+        </div>
+
+        <div id="checkerResult" style="display:none;margin-top:1rem"></div>
+
+        <div style="margin-top:1.5rem">
+          <p style="font-size:13px;font-weight:500;margin-bottom:10px;color:var(--text-secondary)">Common combinations to check</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <button class="filter-pill" data-a="Retinol" data-b="Vitamin C" onclick="handleQuickCheck(this)">Retinol + Vitamin C</button>
+            <button class="filter-pill" data-a="Niacinamide" data-b="Vitamin C" onclick="handleQuickCheck(this)">Niacinamide + Vitamin C</button>
+            <button class="filter-pill" data-a="Retinol" data-b="Salicylic acid (BHA)" onclick="handleQuickCheck(this)">Retinol + Salicylic acid</button>
+            <button class="filter-pill" data-a="Glycolic acid" data-b="Vitamin C" onclick="handleQuickCheck(this)">Glycolic acid + Vitamin C</button>
+            <button class="filter-pill" data-a="Hyaluronic acid" data-b="Retinol" onclick="handleQuickCheck(this)">Hyaluronic acid + Retinol</button>
+            <button class="filter-pill" data-a="Benzoyl peroxide" data-b="Retinol" onclick="handleQuickCheck(this)">Benzoyl peroxide + Retinol</button>
+            <button class="filter-pill" data-a="Azelaic acid" data-b="Niacinamide" onclick="handleQuickCheck(this)">Azelaic acid + Niacinamide</button>
+            <button class="filter-pill" data-a="Tea tree oil" data-b="Salicylic acid (BHA)" onclick="handleQuickCheck(this)">Tea tree oil + Salicylic acid</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1256,28 +1307,18 @@
   <div id="profile" class="page">
     <div class="section-header"><p class="section-title">Your skin profile</p></div>
     <div style="padding:0 1.5rem 1.5rem" id="profileContent"></div>
-  </div>
 
-
-  <!-- CONTRAINDICATION CHECKER -->
-  <div id="contraindications" class="page">
-    <div class="section-header"><p class="section-title">Contraindication checker</p><span class="section-sub">Find which treatments to avoid based on your condition</span></div>
     <div style="padding:0 1.5rem 1.5rem">
-      <div class="checker-card" style="margin-bottom:1.5rem">
-        <p style="font-size:14px;font-weight:500;margin-bottom:1rem;color:var(--blue-darkest)">Select all conditions that apply to you</p>
-        <div class="cb-group" id="conditionPills" style="gap:8px"></div>
-        <button class="btn-primary" style="margin-top:1.25rem;width:100%;padding:12px" onclick="runContraCheck()"><i class="ti ti-shield-check" aria-hidden="true"></i> Check contraindications</button>
+      <div style="border:0.5px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;background:var(--bg);display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--blue-lighter);display:flex;align-items:center;justify-content:center;color:var(--blue-mid);font-size:16px;flex-shrink:0"><i class="ti ti-moon" id="darkIcon" aria-hidden="true"></i></div>
+          <div>
+            <p style="font-size:13px;font-weight:500">Appearance</p>
+            <p style="font-size:11.5px;color:var(--text-secondary)">Switch between light and dark theme</p>
+          </div>
+        </div>
+        <button class="btn-outline" id="darkToggle" style="padding:8px 16px;font-size:12.5px;flex-shrink:0" onclick="toggleDark()" aria-label="Toggle dark mode"><span id="darkLabel">Dark</span></button>
       </div>
-      <div id="contraResults" style="display:none"></div>
-    </div>
-  </div>
-
-  <!-- PRE & POST PROTOCOLS -->
-  <div id="protocols" class="page">
-    <div class="section-header"><p class="section-title">Pre &amp; post treatment protocols</p><span class="section-sub">What to do before and after each treatment</span></div>
-    <div style="padding:0 1.5rem 1.5rem">
-      <div class="cat-tabs" id="protocolCatTabs" style="margin-bottom:1.25rem"></div>
-      <div id="protocolList"></div>
     </div>
   </div>
 
@@ -1285,7 +1326,7 @@
   <div id="about" class="page">
     <div style="padding:1.5rem">
 
-      <div style="background:var(--blue-darkest);border-radius:var(--border-radius-lg, 12px);padding:2rem 1.5rem;text-align:center;margin-bottom:1.5rem;position:relative;overflow:hidden">
+      <div style="background:var(--navy-deep);border-radius:var(--border-radius-lg, 12px);padding:2rem 1.5rem;text-align:center;margin-bottom:1.5rem;position:relative;overflow:hidden">
         <div style="position:absolute;top:-40px;right:-40px;width:150px;height:150px;border-radius:50%;background:rgba(122,176,232,0.12)"></div>
         <div style="position:absolute;bottom:-30px;left:-30px;width:100px;height:100px;border-radius:50%;background:rgba(122,176,232,0.09)"></div>
         <div style="width:64px;height:64px;border-radius:16px;background:#1a3a6e;border:1px solid #2563a8;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem">
@@ -1300,6 +1341,10 @@
         <h2 style="font-size:22px;font-weight:500;color:#a8c8f0;margin-bottom:6px">DermaHub</h2>
         <p style="font-size:12px;color:#2563a8;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:1rem">Science beyond the skin</p>
         <p style="font-size:13px;color:#9e9e98;line-height:1.7;max-width:420px;margin:0 auto">A professional somatology reference platform built to bridge the gap between clinical knowledge and everyday skin care — for students, therapists and clients alike.</p>
+        <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:1.25rem">
+          <button class="btn-outline" style="font-size:12px;padding:7px 16px;background:transparent;color:#a8c8f0;border-color:#2563a8" onclick="document.getElementById('glossarySection').scrollIntoView({behavior:'smooth'})"><i class="ti ti-search" aria-hidden="true"></i> Jump to glossary</button>
+          <button class="btn-outline" style="font-size:12px;padding:7px 16px;background:transparent;color:#a8c8f0;border-color:#2563a8" onclick="document.getElementById('referencesSection').scrollIntoView({behavior:'smooth'})"><i class="ti ti-book" aria-hidden="true"></i> Jump to clinical references</button>
+        </div>
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
@@ -1336,13 +1381,181 @@
         <p style="font-size:12px;color:var(--blue-mid);line-height:1.7">DermaHub is an educational and informational reference tool. It does not replace professional consultation with a qualified and registered somatologist. Always seek advice from a licensed professional before starting any treatment.</p>
       </div>
 
-      <div style="border:0.5px solid var(--border);border-radius:12px;padding:1.5rem;background:var(--bg)">
+      <div style="border:0.5px solid var(--border);border-radius:12px;padding:1.5rem;background:var(--bg);margin-bottom:1.5rem">
         <p style="font-size:15px;font-weight:500;margin-bottom:1rem">Built for South Africa</p>
         <p style="font-size:13px;color:var(--text-secondary);line-height:1.8">DermaHub is designed with the South African somatology context in mind — including treatment recommendations relevant to melanin-rich skin, local industry standards and the demographics of South African clients.</p>
         <div style="margin-top:1rem;padding-top:1rem;border-top:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
           <p style="font-size:12px;color:var(--text-secondary)">Version 1.0 · 2025</p>
           <span style="font-size:11px;padding:3px 10px;border-radius:20px;background:var(--blue-lighter);color:var(--blue-mid)">Somatology Reference App</span>
         </div>
+      </div>
+
+      <div id="glossarySection" style="border-top:0.5px solid var(--border);padding-top:1.5rem;margin-top:0.5rem;margin-bottom:1.5rem">
+
+        <div style="background:var(--navy-deep);border-radius:var(--border-radius-lg, 12px);padding:2rem 1.5rem;text-align:center;margin-bottom:1.5rem;position:relative;overflow:hidden">
+          <div style="position:absolute;top:-40px;right:-40px;width:150px;height:150px;border-radius:50%;background:rgba(122,176,232,0.12)"></div>
+          <div style="position:absolute;bottom:-30px;left:-30px;width:100px;height:100px;border-radius:50%;background:rgba(122,176,232,0.09)"></div>
+          <div style="width:56px;height:56px;border-radius:14px;background:#1a3a6e;border:1px solid #2563a8;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:#a8c8f0;font-size:26px"><i class="ti ti-search" aria-hidden="true"></i></div>
+          <h2 style="font-size:22px;font-weight:500;color:#a8c8f0;margin-bottom:6px">Glossary</h2>
+          <p style="font-size:13px;color:#9e9e98;line-height:1.7;max-width:440px;margin:0 auto">Plain-language explanations of the clinical and skincare terms used throughout DermaHub.</p>
+        </div>
+
+        <input class="ing-search" type="text" id="glossarySearch" placeholder="Search a term (e.g. sebum, humectant, PIH)..." oninput="filterGlossary(this.value)" style="margin-bottom:1.25rem">
+
+        <div id="glossaryList"></div>
+        <p id="glossaryEmpty" style="display:none;font-size:13px;color:var(--text-secondary);text-align:center;padding:1.5rem 0">No matching terms found.</p>
+
+      </div>
+
+      <div id="referencesSection" style="border-top:0.5px solid var(--border);padding-top:1.5rem;margin-top:0.5rem">
+
+      <div style="background:var(--navy-deep);border-radius:var(--border-radius-lg, 12px);padding:2rem 1.5rem;text-align:center;margin-bottom:1.5rem;position:relative;overflow:hidden">
+        <div style="position:absolute;top:-40px;right:-40px;width:150px;height:150px;border-radius:50%;background:rgba(122,176,232,0.12)"></div>
+        <div style="position:absolute;bottom:-30px;left:-30px;width:100px;height:100px;border-radius:50%;background:rgba(122,176,232,0.09)"></div>
+        <div style="width:56px;height:56px;border-radius:14px;background:#1a3a6e;border:1px solid #2563a8;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:#a8c8f0;font-size:26px"><i class="ti ti-book" aria-hidden="true"></i></div>
+        <h2 style="font-size:22px;font-weight:500;color:#a8c8f0;margin-bottom:6px">Clinical References</h2>
+        <p style="font-size:13px;color:#9e9e98;line-height:1.7;max-width:440px;margin:0 auto">Peer-reviewed sources (2022 onward) underpinning the ingredient and treatment content in DermaHub, cited in Harvard style.</p>
+      </div>
+
+      <div style="border:0.5px solid var(--blue-light);border-radius:12px;padding:1.25rem;background:var(--blue-lighter);margin-bottom:1.5rem">
+        <p style="font-size:12px;color:var(--blue-mid);line-height:1.7"><i class="ti ti-info-circle" aria-hidden="true"></i> Every treatment category and ingredient in DermaHub is backed by at least one real, peer-reviewed source (2022 or later) below. This reference list is reviewed as the treatment and ingredient library grows.</p>
+      </div>
+
+      <p style="font-size:13px;font-weight:500;color:var(--blue-darkest);margin-bottom:0.75rem;padding-left:2px">Actives &amp; ingredients</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:1.75rem">
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Niacinamide</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Kuai, Z., Wang, W., Yang, J., He, X., Yi, Y., Wang, H., Zheng, Y. and Ai, Y., 2025. The anti-acne and reduction of hyperpigmentation effects of products containing retinol, niacinamide, ceramides, and dipotassium glycyrrhizinate in Chinese women. <em>Cosmetics</em>, 12(2), p.69.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Retinol</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Yin, L. et al., 2023. Human skin aging and the anti-aging properties of retinol. <em>Biomolecules</em>, 13(11), p.1614.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Vitamin C</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Correia, G. et al., 2023. Efficacy of topical vitamin C in melasma and photoaging: A systematic review. <em>Journal of Cosmetic Dermatology</em>, 22(9), pp.2426–2433.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Salicylic acid (BHA)</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Li, S., He, X., Zhang, Z., Zhang, X., Niu, Y., Steel, A. and Wang, H., 2023. Efficacy and safety of a facial serum and a mask containing salicylic acid and lipohydroxy acid in acne management: A randomized controlled trial. <em>Journal of Cosmetic Dermatology</em>, 22(9), pp.2502–2511.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Hyaluronic acid</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Bravo, B., Correia, P., Gonçalves Junior, J.E., Sant'Anna, B. and Kerob, D., 2022. Benefits of topical hyaluronic acid for skin quality and signs of skin aging: From literature review to clinical evidence. <em>Dermatologic Therapy</em>, 35(12), p.e15903.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Azelaic acid</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">King, S., Campbell, J., Rowe, R., Daly, M-L., Moncrieff, G. and Maybury, C., 2023. A systematic review to evaluate the efficacy of azelaic acid in the management of acne, rosacea, melasma and skin aging. <em>Journal of Cosmetic Dermatology</em>, 22(10), pp.2650–2662.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Bakuchiol</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Park, S.J., 2022. A comprehensive review of topical bakuchiol for the treatment of photoaging. <em>Journal of Integrative Dermatology</em>, 1(1).</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Peptides</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Rovero, P., Malgapo, D.M.H., Sparavigna, A., Beilin, G., Wong, V. and Lao, M.P., 2022. The clinical evidence-based paradigm of topical anti-aging skincare formulations enriched with bio-active peptide SA1-III (KP1) as collagen modulator: From bench to bedside. <em>Clinical, Cosmetic and Investigational Dermatology</em>, 15, pp.2693–2703.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Centella asiatica &amp; ceramides</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Su, W. et al., 2025. The effectiveness and safety of a skin care product with Centella asiatica leaf extract, ceramide NP, and panthenol in subjects with sensitive skin: A prospective, observational study. <em>Journal of Cosmetic Dermatology</em>.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Zinc oxide</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Pangilinan, N.D.T., Shalbaf, M., Souza, A., Chavan, B., Bonn, C. and Birch-Machin, M.A., 2025. Profiling the anti-photoaging impact of titanium dioxide and zinc oxide nanoparticles: A focus on signaling pathways. <em>The FASEB Journal</em>, 39(9), p.e70568.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Benzoyl peroxide</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Sattar, K., Sakina, S., Mumtaz, S., Behram, F., Akbar, A., Jadoon, S.K. and Tasneem, S., 2024. Safety and efficacy of fixed-dose combination of adapalene and benzoyl peroxide in acne vulgaris treatment: A systematic review of clinical trials. <em>Cureus</em>, 16(9), p.e69341.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Tea tree oil</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Kairey, L., Agnew, T., Bowles, E.J., Barkla, B.J., Wardle, J. and Lauche, R., 2023. Efficacy and safety of <em>Melaleuca alternifolia</em> (tea tree) oil for human health — A systematic review of randomized controlled trials. <em>Frontiers in Pharmacology</em>, 14, p.1116077.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Kojic acid &amp; alpha arbutin</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Tantanasrigul, B. et al., 2025. The efficacy of topical cosmetic containing alpha-arbutin 5% and kojic acid 2% compared with triple combination cream for the treatment of melasma: A split-face, evaluator-blinded randomized pilot study. <em>Journal of Cosmetic Dermatology</em>.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Squalane</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Rastogi, R. and Gholap, A., 2023. Daily use of a bakuchiol and squalane-containing face serum impacts skin esthetics. <em>CosmoDerma</em>, 3, p.182.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Aloe vera</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Massoud, D., Alrashdi, B.M., Fouda, M.M.A., El-kott, A., Soliman, S.A. and Abd-Elhafeez, H.H., 2022. Aloe vera and wound healing: A brief review. <em>Brazilian Journal of Pharmaceutical Sciences</em>, 58, p.e20837.</p>
+        </div>
+
+      </div>
+
+      <p style="font-size:13px;font-weight:500;color:var(--blue-darkest);margin-bottom:0.75rem;padding-left:2px">Treatments &amp; procedures</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:1.5rem">
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Glycolic &amp; lactic acid peels (AHA), superficial chemical peel</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Almeman, A.A., 2024. Evaluating the efficacy and safety of alpha-hydroxy acids in dermatological practice: A comprehensive clinical and legal review. <em>Clinical, Cosmetic and Investigational Dermatology</em>, 17, pp.1661–1685.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Salicylic acid peel (BHA)</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Li, S., He, X., Zhang, Z., Zhang, X., Niu, Y., Steel, A. and Wang, H., 2023. Efficacy and safety of a facial serum and a mask containing salicylic acid and lipohydroxy acid in acne management: A randomized controlled trial. <em>Journal of Cosmetic Dermatology</em>, 22(9), pp.2502–2511.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Microdermabrasion</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Makino, E.T., Huang, P.C., Emmerich, T., Jiang, L.I. and Mehta, R.C., 2023. Efficacy and tolerability of cosmetic serums enriched with five forms of hyaluronic acid as part of biweekly diamond tip microdermabrasion treatments for facial skin dryness and age-associated features. <em>Clinical, Cosmetic and Investigational Dermatology</em>, 16, pp.1123–1134.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Electrolysis (thermolysis hair removal)</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Yuan, N., Feldman, A.T., Chin, P., Zaliznyak, M., Rabizadeh, S. and Garcia, M.M., 2022. Comparison of permanent hair removal procedures before gender-affirming vaginoplasty: Why we should consider laser hair removal as a first-line treatment for patients who meet criteria. <em>Sexual Medicine</em>, 10(5), p.100545.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Swedish body massage</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Rapaport, M.H., Schettler, P.J., Larson, E.R., Edwards, S.A., Dunlop, B.W., Rakofsky, J.J. and Kinkead, B., 2023. A preliminary descriptive report of the longevity of the effects of Swedish massage therapy for subjects with generalized anxiety disorder. <em>Journal of Bodywork and Movement Therapies</em>, 33, pp.176–181.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Hot stone massage</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Hojat Ansari, M., Aemmi, S.Z. and Esmaily, H., 2025. Effectiveness of slow-stroke back and hot stone massage therapy on postoperative anxiety management in orthopedic patients: A randomized clinical trial study. <em>Journal of PeriAnesthesia Nursing</em>, 40(5), pp.1295–1299.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Lymphatic drainage massage</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Lin, Y., Yang, Y., Zhang, X., Li, W., Li, H. and Mu, D., 2022. Manual lymphatic drainage for breast cancer-related lymphedema: A systematic review and meta-analysis of randomized controlled trials. <em>Clinical Breast Cancer</em>, 22(5), pp.e664–e673.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Cellulite treatment</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Arora, G., Patil, A., Hooshanginezhad, Z. et al., 2022. Cellulite: Presentation and management. <em>Journal of Cosmetic Dermatology</em>, 21(4), pp.1393–1401.</p>
+        </div>
+
+        <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg)">
+          <p style="font-size:12px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">Paraffin wax treatment</p>
+          <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">Kim, S-G., Kang, J.W., Boo, J.H., Jin, D.U., Choi, S.J., Song, G.G. and Jung, J.H., 2023. Effectiveness of paraffin bath therapy for the symptoms and function of hand diseases: A systematic review and meta-analysis of randomized controlled trials. <em>Journal of Hand Therapy</em>, 36(3), pp.706–712.</p>
+        </div>
+
+      </div>
+
+      <div style="border:0.5px solid var(--border);border-radius:12px;padding:1.5rem;background:var(--bg)">
+        <p style="font-size:13px;font-weight:500;margin-bottom:8px"><i class="ti ti-flask" aria-hidden="true"></i> A note on sourcing</p>
+        <p style="font-size:12.5px;color:var(--text-secondary);line-height:1.8">Facts and clinical claims in DermaHub are drawn from and cross-checked against peer-reviewed dermatology, cosmetic science and physiotherapy literature; all descriptions in the app are written independently rather than copied from source text. This reference list is reviewed periodically as new treatments and ingredients are added to the library.</p>
+      </div>
+
       </div>
 
     </div>
@@ -1378,6 +1591,11 @@
       if (icon) icon.className = 'ti ti-sun';
       if (label) label.textContent = 'Light';
     }
+  }
+
+  /* ── ROBUST NAV BUTTON LOOKUP ── */
+  function navBtn(pageId) {
+    return document.querySelector('.nav-btn[data-page="' + pageId + '"]');
   }
 
   /* ── SMOOTH PAGE TRANSITIONS ── */
@@ -1743,7 +1961,7 @@
     }).join('');
   }
 
-  function goTreat(cat) { currentCat = cat; showPage('treatments', document.querySelectorAll('.nav-btn')[1]); buildCatGrid('treatCatGrid', 'selectCat'); buildTreatments(); }
+  function goTreat(cat) { currentCat = cat; showPage('treatments', navBtn('treatments')); buildCatGrid('treatCatGrid', 'selectCat'); buildTreatments(); }
   function selectCat(cat) { currentCat = cat; buildCatGrid('treatCatGrid', 'selectCat'); buildTreatments(); }
 
   /* ── TREATMENTS ── */
@@ -1775,6 +1993,24 @@
   function toggleT(i) { document.getElementById('bd' + i).classList.toggle('open'); document.getElementById('ic' + i).classList.toggle('open'); }
 
   /* ── INGREDIENTS ── */
+  function switchIngTab(tab) {
+    const guideSection = document.getElementById('ingGuideSection');
+    const checkerSection = document.getElementById('ingCheckerSection');
+    const guideBtn = document.getElementById('ingSubtabGuide');
+    const checkerBtn = document.getElementById('ingSubtabChecker');
+    if (tab === 'checker') {
+      guideSection.style.display = 'none';
+      checkerSection.style.display = 'block';
+      guideBtn.classList.remove('active');
+      checkerBtn.classList.add('active');
+    } else {
+      guideSection.style.display = 'block';
+      checkerSection.style.display = 'none';
+      guideBtn.classList.add('active');
+      checkerBtn.classList.remove('active');
+    }
+  }
+
   function buildIng(list) {
     document.getElementById('ingGrid').innerHTML = list.map(ing => `
       <div class="ing-card">
@@ -1886,7 +2122,7 @@
       el.innerHTML = `
         <!-- DASHBOARD HEADER -->
         <div style="border:0.5px solid var(--border);border-radius:12px;background:var(--bg);overflow:hidden;margin-bottom:1rem">
-          <div style="background:var(--blue-darkest);padding:1.5rem;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <div style="background:var(--navy-deep);padding:1.5rem;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
             <div class="avatar" style="width:56px;height:56px;font-size:18px;flex-shrink:0">${ini}</div>
             <div style="flex:1">
               <p style="font-weight:500;font-size:18px;color:#a8c8f0;margin-bottom:2px">${userProfile.name}</p>
@@ -1920,9 +2156,9 @@
             <div style="width:40px;height:40px;border-radius:50%;background:var(--blue-lighter);display:flex;align-items:center;justify-content:center;color:var(--blue-mid);font-size:18px;flex-shrink:0"><i class="ti ti-shield" aria-hidden="true"></i></div>
             <div>
               <p style="font-size:13px;font-weight:500;margin-bottom:2px">Contraindication check available</p>
-              <p style="font-size:12px;color:var(--text-secondary)">Visit the Contra tab to check which treatments to avoid based on your health conditions.</p>
+              <p style="font-size:12px;color:var(--text-secondary)">Open the Treatments tab and expand the contraindication checker to see which treatments to avoid based on your health conditions.</p>
             </div>
-            <button class="btn-outline" style="font-size:12px;padding:6px 14px;flex-shrink:0" onclick="showPage('contraindications',document.querySelectorAll('.nav-btn')[4])">Check now</button>
+            <button class="btn-outline" style="font-size:12px;padding:6px 14px;flex-shrink:0" onclick="goToContraCheck()">Check now</button>
           </div>
         </div>
 
@@ -1960,10 +2196,10 @@
         <div style="border:0.5px solid var(--border);border-radius:12px;background:var(--bg);padding:1.25rem">
           <p class="dash-section-title">Quick actions</p>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <button class="btn-outline" style="padding:10px;font-size:13px;display:flex;align-items:center;gap:6px;justify-content:center" onclick="showPage('checker',document.querySelectorAll('.nav-btn')[3])"><i class="ti ti-flask" aria-hidden="true"></i> Ingredient checker</button>
-            <button class="btn-outline" style="padding:10px;font-size:13px;display:flex;align-items:center;gap:6px;justify-content:center" onclick="showPage('protocols',document.querySelectorAll('.nav-btn')[5])"><i class="ti ti-book" aria-hidden="true"></i> Treatment protocols</button>
-            <button class="btn-outline" style="padding:10px;font-size:13px;display:flex;align-items:center;gap:6px;justify-content:center" onclick="showPage('ai',document.querySelectorAll('.nav-btn')[6])"><i class="ti ti-robot" aria-hidden="true"></i> Ask the AI</button>
-            <button class="btn-outline" style="padding:10px;font-size:13px;display:flex;align-items:center;gap:6px;justify-content:center" onclick="showPage('treatments',document.querySelectorAll('.nav-btn')[1])"><i class="ti ti-sparkles" aria-hidden="true"></i> Browse treatments</button>
+            <button class="btn-outline" style="padding:10px;font-size:13px;display:flex;align-items:center;gap:6px;justify-content:center" onclick="goToIngredientChecker()"><i class="ti ti-flask" aria-hidden="true"></i> Ingredient checker</button>
+            <button class="btn-outline" style="padding:10px;font-size:13px;display:flex;align-items:center;gap:6px;justify-content:center" onclick="goToContraCheck()"><i class="ti ti-shield" aria-hidden="true"></i> Check contraindications</button>
+            <button class="btn-outline" style="padding:10px;font-size:13px;display:flex;align-items:center;gap:6px;justify-content:center" onclick="showPage('ai', navBtn('ai'))"><i class="ti ti-robot" aria-hidden="true"></i> Ask the AI</button>
+            <button class="btn-outline" style="padding:10px;font-size:13px;display:flex;align-items:center;gap:6px;justify-content:center" onclick="showPage('treatments', navBtn('treatments'))"><i class="ti ti-sparkles" aria-hidden="true"></i> Browse treatments</button>
           </div>
         </div>
       `;
@@ -1971,7 +2207,7 @@
       el.innerHTML = `
         <div style="max-width:520px">
           <div style="border:0.5px solid var(--blue-light);border-radius:12px;padding:1.5rem;background:var(--blue-lighter);margin-bottom:1rem;text-align:center">
-            <div style="width:56px;height:56px;border-radius:50%;background:var(--blue-darkest);display:flex;align-items:center;justify-content:center;margin:0 auto 12px">
+            <div style="width:56px;height:56px;border-radius:50%;background:var(--navy-deep);display:flex;align-items:center;justify-content:center;margin:0 auto 12px">
               <svg width="28" height="28" viewBox="0 0 40 40" aria-hidden="true">
                 <text x="20" y="17" text-anchor="middle" font-family="serif" font-size="13" font-weight="700" fill="#a8c8f0" letter-spacing="-0.5">DH</text>
                 <path d="M13 22 Q17 16 20 20 Q23 24 27 18" stroke="#7ab0e8" stroke-width="1.4" fill="none" stroke-linecap="round"/>
@@ -2084,6 +2320,7 @@
   }
 
   function buildTreatmentCard(t, i) {
+    const proto = protocolsByName[t.name];
     return `<div class="treatment-card">
       <div class="treatment-header" onclick="toggleTById('tbd${i}','tic${i}')">
         <div class="t-meta">
@@ -2103,6 +2340,21 @@
         <div class="contra-block"><div class="contra-label"><i class="ti ti-alert-triangle" aria-hidden="true"></i> Contraindications</div><div class="info-text" style="color:var(--danger-text);font-size:13px">${t.contraindications}</div></div>
         <div style="height:8px"></div>
         <div class="aftercare-block"><div class="aftercare-label"><i class="ti ti-heart" aria-hidden="true"></i> Aftercare tips</div><div class="aftercare-text">${t.aftercare}</div></div>
+        ${proto ? `
+        <div style="height:8px"></div>
+        <div class="protocol-inline-block">
+          <div class="contra-label" style="color:var(--blue-mid)"><i class="ti ti-book" aria-hidden="true"></i> Pre &amp; post treatment protocol <span style="font-weight:400;color:var(--text-secondary);font-size:11px;margin-left:6px"><i class="ti ti-clock" aria-hidden="true"></i> ${proto.frequency}</span></div>
+          <div class="protocol-cols" style="margin-top:8px">
+            <div class="protocol-col pre-col">
+              <p class="protocol-col-title"><i class="ti ti-clock" aria-hidden="true"></i> Pre-treatment</p>
+              <ul class="protocol-list">${proto.pre.map(item => `<li>${item}</li>`).join('')}</ul>
+            </div>
+            <div class="protocol-col post-col">
+              <p class="protocol-col-title"><i class="ti ti-heart" aria-hidden="true"></i> Post-treatment</p>
+              <ul class="protocol-list">${proto.post.map(item => `<li>${item}</li>`).join('')}</ul>
+            </div>
+          </div>
+        </div>` : ''}
       </div>
     </div>`;
   }
@@ -2131,7 +2383,12 @@
       i.conditions.some(c => c.toLowerCase().includes(q))
     ).slice(0, 3);
 
-    if (tMatches.length === 0 && iMatches.length === 0) {
+    const gMatches = glossaryTerms.filter(g =>
+      g.term.toLowerCase().includes(q) ||
+      g.def.toLowerCase().includes(q)
+    ).slice(0, 3);
+
+    if (tMatches.length === 0 && iMatches.length === 0 && gMatches.length === 0) {
       resultsEl.innerHTML = '<div class="home-result-item" style="color:var(--text-secondary);cursor:default">No results found</div>';
       resultsEl.style.display = 'block';
       return;
@@ -2154,16 +2411,36 @@
           <div><div class="home-result-name">${ing.name}</div><div class="home-result-cat">Ingredient</div></div>
         </div>`).join('');
     }
+    if (gMatches.length > 0) {
+      html += `<div style="padding:8px 14px 4px;font-size:11px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em">Glossary</div>`;
+      html += gMatches.map(g => `
+        <div class="home-result-item" onclick="goToGlossaryTerm('${g.term.replace(/'/g, "\\'")}')">
+          <div class="home-result-icon"><i class="ti ti-search" aria-hidden="true"></i></div>
+          <div><div class="home-result-name">${g.term}</div><div class="home-result-cat">${g.def.slice(0, 55)}...</div></div>
+        </div>`).join('');
+    }
 
     resultsEl.innerHTML = html;
     resultsEl.style.display = 'block';
+  }
+
+  function goToGlossaryTerm(term) {
+    document.getElementById('homeSearchInput').value = '';
+    document.getElementById('homeSearchResults').style.display = 'none';
+    showPage('about', navBtn('about'));
+    setTimeout(() => {
+      const searchBox = document.getElementById('glossarySearch');
+      const section = document.getElementById('glossarySection');
+      if (searchBox) { searchBox.value = term; filterGlossary(term); }
+      if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 320);
   }
 
   function goToTreatment(cat, name) {
     document.getElementById('homeSearchInput').value = '';
     document.getElementById('homeSearchResults').style.display = 'none';
     currentCat = cat;
-    showPage('treatments', document.querySelectorAll('.nav-btn')[1]);
+    showPage('treatments', navBtn('treatments'));
     buildCatGrid('treatCatGrid', 'selectCat');
     buildTreatments();
     // Pre-fill search and filter
@@ -2176,7 +2453,7 @@
   function goToIngredient(name) {
     document.getElementById('homeSearchInput').value = '';
     document.getElementById('homeSearchResults').style.display = 'none';
-    showPage('ingredients', document.querySelectorAll('.nav-btn')[2]);
+    showPage('ingredients', navBtn('ingredients'));
     setTimeout(() => {
       const el = document.querySelector('.ing-search');
       if (el) { el.value = name; filterIng(name); }
@@ -2242,6 +2519,33 @@
       label.style.borderColor = 'var(--border)';
       label.style.color = '';
     }
+  }
+
+  function toggleContraPanel() {
+    const body = document.getElementById('contraPanelBody');
+    const icon = document.getElementById('contraToggleIcon');
+    const isOpen = body.style.display === 'block';
+    body.style.display = isOpen ? 'none' : 'block';
+    icon.classList.toggle('open', !isOpen);
+  }
+
+  function goToContraCheck() {
+    showPage('treatments', navBtn('treatments'));
+    setTimeout(() => {
+      const body = document.getElementById('contraPanelBody');
+      const icon = document.getElementById('contraToggleIcon');
+      if (body && body.style.display !== 'block') {
+        body.style.display = 'block';
+        icon.classList.add('open');
+      }
+      const panel = document.getElementById('contraToggleBtn');
+      if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300);
+  }
+
+  function goToIngredientChecker() {
+    showPage('ingredients', navBtn('ingredients'));
+    setTimeout(() => switchIngTab('checker'), 300);
   }
 
   function runContraCheck() {
@@ -2420,57 +2724,72 @@
     }
   ];
 
-  let activeProtocolCat = 'Facials';
+  /* Protocols are now shown inline within each treatment card (see buildTreatmentCard) */
+  const protocolsByName = Object.fromEntries(protocols.map(p => [p.name, p]));
 
-  function buildProtocolCatTabs() {
-    const el = document.getElementById('protocolCatTabs');
+  /* ── GLOSSARY ── */
+  const glossaryTerms = [
+    { term: 'Antioxidant', def: 'A substance that neutralises free radicals — unstable molecules that damage skin cells — helping protect skin from environmental damage and premature ageing.' },
+    { term: 'Atrophy', def: 'Thinning or wasting of the skin, often from ageing, sun damage or long-term steroid use.' },
+    { term: 'Barrier function (skin barrier)', def: "The outermost layer of skin that keeps moisture in and irritants, bacteria and pollutants out." },
+    { term: 'Blackhead (open comedone)', def: 'A clogged pore where trapped oil and dead skin oxidise and darken at the surface.' },
+    { term: 'Cell turnover', def: 'The natural cycle of skin cells forming, maturing and shedding. Treatments like retinol and AHAs speed this process up.' },
+    { term: 'Collagen', def: "A structural protein that gives skin its firmness and elasticity. Production naturally declines with age." },
+    { term: 'Comedone', def: 'A blocked hair follicle or pore — appears as a blackhead (open) or whitehead (closed).' },
+    { term: 'Contraindication', def: 'A condition or circumstance that makes a particular treatment inadvisable or unsafe for a specific person.' },
+    { term: 'Décolletage', def: 'The area of the chest and upper neck, often included in facials and anti-ageing treatments alongside the face.' },
+    { term: 'Desquamation', def: 'The natural shedding of dead skin cells from the outer layer of the skin.' },
+    { term: 'Elasticity', def: "Skin's ability to stretch and spring back to its original shape. Decreases with age and sun exposure." },
+    { term: 'Emollient', def: 'An ingredient that softens and smooths skin by filling in the gaps between skin cells.' },
+    { term: 'Erythema', def: 'Redness of the skin caused by increased blood flow, typically from irritation or inflammation.' },
+    { term: 'Exfoliation', def: 'Removing dead skin cells from the surface of the skin, either physically (scrubs, microdermabrasion) or chemically (acids like AHA/BHA).' },
+    { term: 'Free radical', def: 'An unstable molecule that can damage skin cells and accelerate ageing. Neutralised by antioxidants.' },
+    { term: 'Humectant', def: 'An ingredient that draws moisture from the air into the skin, e.g. hyaluronic acid or glycerin.' },
+    { term: 'Hyperpigmentation', def: 'Patches of skin that appear darker than the surrounding area, caused by excess melanin production.' },
+    { term: 'Hypopigmentation', def: 'Patches of skin that appear lighter than the surrounding skin, due to reduced melanin.' },
+    { term: 'Isotretinoin', def: 'A powerful oral acne medication (often known by the brand name Roaccutane) that significantly thins the skin — most professional exfoliating treatments must be avoided during and for months after use.' },
+    { term: 'Keratolytic', def: 'An ingredient that helps loosen and shed the outer layer of dead skin cells, e.g. salicylic acid.' },
+    { term: 'Lymphatic drainage', def: "A gentle massage technique that encourages movement of lymph fluid, helping reduce puffiness and support the body's natural detoxification." },
+    { term: 'Melanin', def: 'The pigment responsible for skin, hair and eye colour. Overproduction leads to hyperpigmentation.' },
+    { term: 'Melasma', def: 'A common form of hyperpigmentation, often triggered by hormones and sun exposure, appearing as brown or grey-brown patches.' },
+    { term: 'Microcurrent', def: 'A treatment using very low-level electrical currents to stimulate facial muscles, aiming to firm and tone the skin.' },
+    { term: 'Neutralise (in peels)', def: "The step of stopping a chemical peel's action, usually with a solution such as sodium bicarbonate." },
+    { term: 'Patch test', def: 'Applying a small amount of a product to a small area of skin to check for a reaction before full use.' },
+    { term: 'pH', def: "A measure of how acidic or alkaline a substance is. Skin's natural pH is slightly acidic, around 4.5–5.5." },
+    { term: 'Photosensitivity', def: 'Increased sensitivity of the skin to sunlight — a common side effect of ingredients like vitamin C, AHAs and retinol.' },
+    { term: 'PIH (post-inflammatory hyperpigmentation)', def: 'Dark marks left behind after acne, injury or inflammation has healed.' },
+    { term: 'Rosacea', def: 'A chronic skin condition causing facial redness, visible blood vessels and sometimes bumps — often triggered by heat, sun or certain skincare ingredients.' },
+    { term: 'Sebaceous gland', def: 'A small gland in the skin that produces sebum (oil).' },
+    { term: 'Sebum', def: 'The natural oil produced by the skin to keep it lubricated and protected.' },
+    { term: 'Somatology', def: 'The South African term for the study and clinical practice of skin, body and beauty therapy.' },
+    { term: 'Telangiectasia', def: "Small, visible blood vessels near the skin's surface, often seen in rosacea-prone skin." },
+    { term: 'Thermolysis', def: 'A form of electrolysis that uses heat, via an alternating electrical current, to permanently destroy the hair follicle.' }
+  ];
+
+  function buildGlossary(list) {
+    const el = document.getElementById('glossaryList');
+    const empty = document.getElementById('glossaryEmpty');
     if (!el) return;
-    const protocolCats = [...new Set(protocols.map(p => p.cat))];
-    el.innerHTML = protocolCats.map(c =>
-      `<button class="cat-tab${c === activeProtocolCat ? ' active' : ''}" onclick="selectProtocolCat('${c}')">${c}</button>`
-    ).join('');
-  }
-
-  function selectProtocolCat(cat) {
-    activeProtocolCat = cat;
-    buildProtocolCatTabs();
-    buildProtocolList();
-  }
-
-  function buildProtocolList() {
-    const el = document.getElementById('protocolList');
-    if (!el) return;
-    const filtered = protocols.filter(p => p.cat === activeProtocolCat);
-    el.innerHTML = filtered.map((p, i) => `
-      <div class="protocol-card">
-        <div class="protocol-header" onclick="toggleProtocol(${i})">
-          <div>
-            <p style="font-size:15px;font-weight:500;margin-bottom:4px">${p.name}</p>
-            <span style="font-size:11px;padding:2px 10px;border-radius:20px;background:var(--info-bg);color:var(--info-text)"><i class="ti ti-clock" aria-hidden="true"></i> ${p.frequency}</span>
-          </div>
-          <i class="ti ti-chevron-down expand-icon" id="pic${i}" aria-hidden="true"></i>
-        </div>
-        <div class="protocol-body" id="pbd${i}">
-          <div class="protocol-cols">
-            <div class="protocol-col pre-col">
-              <p class="protocol-col-title"><i class="ti ti-clock" aria-hidden="true"></i> Pre-treatment</p>
-              <ul class="protocol-list">${p.pre.map(item => `<li>${item}</li>`).join('')}</ul>
-            </div>
-            <div class="protocol-col post-col">
-              <p class="protocol-col-title"><i class="ti ti-heart" aria-hidden="true"></i> Post-treatment</p>
-              <ul class="protocol-list">${p.post.map(item => `<li>${item}</li>`).join('')}</ul>
-            </div>
-          </div>
-        </div>
+    const sorted = [...list].sort((a, b) => a.term.localeCompare(b.term));
+    if (sorted.length === 0) {
+      el.innerHTML = '';
+      if (empty) empty.style.display = 'block';
+      return;
+    }
+    if (empty) empty.style.display = 'none';
+    el.innerHTML = sorted.map(g => `
+      <div style="border:0.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;background:var(--bg);margin-bottom:10px">
+        <p style="font-size:13px;font-weight:500;color:var(--blue-mid);margin-bottom:4px">${g.term}</p>
+        <p style="font-size:12.5px;line-height:1.7;color:var(--text-secondary)">${g.def}</p>
       </div>`).join('');
   }
 
-  function toggleProtocol(i) {
-    document.getElementById('pbd' + i).classList.toggle('open');
-    document.getElementById('pic' + i).classList.toggle('open');
+  function filterGlossary(val) {
+    const q = val.trim().toLowerCase();
+    if (!q) { buildGlossary(glossaryTerms); return; }
+    const filtered = glossaryTerms.filter(g => g.term.toLowerCase().includes(q) || g.def.toLowerCase().includes(q));
+    buildGlossary(filtered);
   }
-
-
 
   /* ── FACE ZONE MAP DATA ── */
   const zoneData = {
@@ -2852,8 +3171,7 @@
   buildIng(ingredients);
   buildProfile();
   buildConditionPills();
-  buildProtocolCatTabs();
-  buildProtocolList();
+  buildGlossary(glossaryTerms);
   buildSkinGuideGrid();
 </script>
 </body>
