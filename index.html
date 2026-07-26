@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DermaHub — Science beyond the skin</title>
+
+  <!-- ══ GOOGLE ANALYTICS (GA4) ══ -->
+  <!-- Replace G-XXXXXXXXXX below with your real Measurement ID from analytics.google.com -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
   <style>
   /* ── SELF-CONTAINED SVG ICONS — no external font needed ── */
   .ti { display: inline-block; width: 1em; height: 1em; vertical-align: -0.125em; }
@@ -1604,6 +1615,14 @@
     const next = document.getElementById(id);
     if (!next || next === current) return;
 
+    /* Track in-app tab views for Google Analytics (safe no-op if GA hasn't loaded) */
+    if (typeof gtag === 'function') {
+      gtag('event', 'page_view', {
+        page_title: id,
+        page_path: '/' + id
+      });
+    }
+
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
 
@@ -1881,8 +1900,9 @@
     });
   });
 
-/* ── API KEY ── Replace with your Anthropic API key when deploying ── */
-  const API_KEY = 'YOUR_API_KEY_HERE';
+  /* The Anthropic API key lives securely on Vercel as an environment variable
+     and is only ever used inside /api/chat.js on the server — never in this
+     client-side file. See /api/chat.js. */
 
   /* ── DISCLAIMER ── */
   function toggleEnterBtn() {
@@ -2046,22 +2066,27 @@
     const sys = `You are the DermaHub skin assistant — a knowledgeable professional somatology assistant for a South African aesthetics reference app. Your slogan is "Science beyond the skin." Help clients and students understand skin types, treatments, ingredients, contraindications and aftercare. Be clear, professional and concise. Always recommend consulting a qualified somatologist for personalised plans. Important: salicylic acid must NOT be used if the client is allergic to aspirin.${userProfile ? ` Client profile — Name: ${userProfile.name}, Skin type: ${userProfile.skinType}, Concerns: ${userProfile.concerns.join(', ')}. Tailor your response where relevant.` : ''}`;
 
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const res = await fetch('/api/chat', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': API_KEY,
-          'anthropic-version': '2023-06-01'
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: sys, messages: chatHistory })
+        body: JSON.stringify({ system: sys, messages: chatHistory })
       });
       const data = await res.json();
-      const reply = data.content && data.content[0] ? data.content[0].text : 'I could not get a response. Please try again.';
-      el.textContent = reply;
-      el.classList.remove('msg-thinking');
-      chatHistory.push({ role: 'assistant', content: reply });
+
+      if (res.status === 429) {
+        el.textContent = data.message || "You're sending messages a little too quickly. Please wait a moment and try again.";
+        el.classList.remove('msg-thinking');
+        chatHistory.pop(); // don't keep the unanswered message in history
+      } else {
+        const reply = data.content && data.content[0] ? data.content[0].text : (data.error || 'I could not get a response. Please try again.');
+        el.textContent = reply;
+        el.classList.remove('msg-thinking');
+        if (data.content && data.content[0]) chatHistory.push({ role: 'assistant', content: reply });
+      }
     } catch (e) {
-      el.textContent = 'Could not connect. Please check your API key and try again.';
+      el.textContent = 'Could not connect to the assistant. Please try again shortly.';
       el.classList.remove('msg-thinking');
     }
     btn.disabled = false;
